@@ -1,5 +1,5 @@
 {
-  "name": "sky",
+  "name": "gulaab",
   "private": true,
   "scripts": {
     "build": "pnpm -r build",

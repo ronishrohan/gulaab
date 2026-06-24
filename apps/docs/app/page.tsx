@@ -1,34 +1,73 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { SoundButton } from "@/components/SoundButton";
 
-export default function Home() {
+function HeroCard() {
+  const [phase, setPhase] = useState<"idle" | "loading" | "done">("idle");
+
+  function handleClick() {
+    if (phase !== "idle") return;
+    setPhase("loading");
+    setTimeout(() => {
+      setPhase("done");
+      setTimeout(() => setPhase("idle"), 1800);
+    }, 2200);
+  }
+
   return (
     <div
       style={{
-        minHeight: "100vh",
-        backgroundColor: "var(--bg)",
-        color: "var(--text)",
-        maxWidth: 1280,
-        margin: "0 auto",
-        padding: "0 64px",
+        borderRadius: 14,
+        background: "var(--bg-subtle)",
+        padding: "120px 48px",
         display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        marginBottom: 64,
       }}
     >
+      <SoundButton
+        variant="solid"
+        color="accent"
+        size="medium"
+        loading={phase === "loading"}
+        onClick={handleClick}
+        soundVariant="solid"
+      >
+        {phase === "done" ? "✓  Order confirmed" : "Pay $24.00"}
+      </SoundButton>
+    </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <div style={{
+      minHeight: "100vh",
+      backgroundColor: "var(--bg)",
+      color: "var(--text)",
+      maxWidth: 1100,
+      margin: "0 auto",
+      padding: "0 64px",
+      display: "flex",
+    }}>
       <Sidebar />
 
       <main style={{ flex: 1, padding: "120px 0 96px 48px", minWidth: 0 }}>
-        <h1
-          style={{
-            fontSize: 22,
-            fontWeight: 600,
-            letterSpacing: "-0.03em",
-            color: "var(--text)",
-            marginBottom: 40,
-          }}
-        >
+        <h1 style={{
+          fontSize: 22, fontWeight: 600,
+          letterSpacing: "-0.03em",
+          color: "var(--text)", marginBottom: 6,
+        }}>
           Button
         </h1>
+        <p style={{ fontSize: 14, color: "var(--text-3)", marginBottom: 48 }}>
+          Interactive elements that respond with intention.
+        </p>
+
+        <HeroCard />
 
         <div style={{ display: "flex", flexDirection: "column", gap: 40 }}>
 
@@ -71,11 +110,6 @@ export default function Home() {
             <SoundButton variant="outline" color="black" soundVariant="outline">Black</SoundButton>
           </ShowcaseRow>
 
-          <ShowcaseRow label="as link">
-            <SoundButton variant="solid" color="accent" render={<Link href="/" />}>Home ↗</SoundButton>
-            <SoundButton variant="outline" color="black" render={<Link href="/" />}>Docs ↗</SoundButton>
-          </ShowcaseRow>
-
           <ShowcaseRow label="states">
             <SoundButton loading>Loading</SoundButton>
             <SoundButton variant="soft" loading>Loading</SoundButton>
@@ -92,9 +126,7 @@ export default function Home() {
 function ShowcaseRow({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "120px 1fr", gap: "0 40px", alignItems: "center" }}>
-      <p style={{ fontSize: 12, color: "var(--text-3)", fontWeight: 500 }}>
-        {label}
-      </p>
+      <p style={{ fontSize: 12, color: "var(--text-3)", fontWeight: 500 }}>{label}</p>
       <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: 8 }}>
         {children}
       </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import { Button, type ButtonProps } from "@sky/ui";
+import { Button, type ButtonProps } from "@gulaab/ui";
 import { playSound } from "@/hooks/useSound";
-import type { ButtonVariant } from "@sky/ui";
+import type { ButtonVariant } from "@gulaab/ui";
 
 interface SoundButtonProps extends ButtonProps {
   soundVariant?: ButtonVariant;

@@ -1,28 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
+import { Moon, Sun } from "@phosphor-icons/react";
 
 export function ThemeToggle() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [mounted, setMounted] = useState(false);
+  const themeRef = useRef(theme);
+  themeRef.current = theme;
 
   useEffect(() => {
     setMounted(true);
-    const stored = localStorage.getItem("sky-theme");
+    const stored = localStorage.getItem("gulaab-theme");
     setTheme(stored === "dark" ? "dark" : "light");
   }, []);
 
-  // Class toggle lives in an effect so flushSync can flush it synchronously
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  function toggle() {
-    const next = theme === "light" ? "dark" : "light";
-    localStorage.setItem("sky-theme", next);
-
-    // Disable all element CSS transitions for the duration of the switch
+  function applyToggle(current: "light" | "dark") {
+    const next = current === "light" ? "dark" : "light";
+    localStorage.setItem("gulaab-theme", next);
     document.documentElement.classList.add("no-transition");
 
     if (
@@ -42,17 +42,29 @@ export function ThemeToggle() {
       flushSync(() => setTheme(next));
     });
 
-    vt.finished.then(() => {
+    vt.finished.finally(() => {
       document.documentElement.classList.remove("no-transition");
     });
   }
+
+  // ⌘\ global shortcut
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === "\\") {
+        e.preventDefault();
+        applyToggle(themeRef.current);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   if (!mounted) return <div style={{ height: 28 }} aria-hidden />;
 
   return (
     <button
-      onClick={toggle}
-      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}
+      onClick={() => applyToggle(theme)}
+      aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode (⌘\\)`}
       style={{
         background: "none",
         border: "none",
@@ -63,14 +75,35 @@ export function ThemeToggle() {
         color: "var(--text-3)",
         fontFamily: "inherit",
         fontWeight: 400,
-        transition: "color 120ms",
+        userSelect: "none",
         textAlign: "left",
         width: "100%",
+        display: "flex",
+        alignItems: "center",
+        gap: 6,
       }}
       onMouseEnter={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "var(--text-2)"; }}
       onMouseLeave={(e) => { (e.currentTarget as HTMLButtonElement).style.color = "var(--text-3)"; }}
     >
-      {theme === "light" ? "Dark" : "Light"}
+      {theme === "light"
+        ? <Moon size={13} weight="regular" />
+        : <Sun size={13} weight="regular" />
+      }
+      <span style={{ flex: 1 }}>{theme === "light" ? "Dark" : "Light"}</span>
+      <kbd style={{
+        fontSize: 10,
+        color: "var(--text-3)",
+        background: "var(--bg-subtle)",
+        border: "1px solid var(--border)",
+        borderRadius: 4,
+        padding: "1px 4px",
+        fontFamily: "inherit",
+        letterSpacing: "0.01em",
+        lineHeight: 1.6,
+        opacity: 0.7,
+      }}>
+        ⌘\
+      </kbd>
     </button>
   );
 }

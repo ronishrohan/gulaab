@@ -49,12 +49,15 @@ export function Sidebar() {
             width: 16,
             height: 16,
             borderRadius: "50%",
-            background: "linear-gradient(to bottom, #0EA5E9, #ffffff)",
+            background: "linear-gradient(to bottom, #FB7185, #FFF1F2)",
             flexShrink: 0,
           }}
         />
-        <span style={{ fontSize: 14, fontWeight: 600, letterSpacing: "-0.03em", color: "var(--text)" }}>
-          Sky UI
+        <span
+          lang="hi"
+          style={{ fontSize: 16, fontWeight: 600, color: "var(--text)", lineHeight: 1, fontFamily: "var(--font-khand), sans-serif" }}
+        >
+          गुलाब
         </span>
       </div>
 

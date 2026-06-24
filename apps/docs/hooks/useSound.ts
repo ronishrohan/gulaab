@@ -14,7 +14,7 @@ function isSoundEnabled(): boolean {
   if (typeof window === "undefined") return false;
   if ("ontouchstart" in window) return false; // disable mobile
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  return localStorage.getItem("sky-sounds") !== "false";
+  return localStorage.getItem("gulaab-sounds") !== "false";
 }
 
 let sharedCtx: AudioContext | null = null;

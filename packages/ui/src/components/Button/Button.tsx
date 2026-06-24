@@ -45,30 +45,30 @@ const buttonVariants = cva(
       },
     },
     compoundVariants: [
-      // solid + color
-      { variant: "solid", color: "accent", class: "bg-sky-500 text-white hover:bg-sky-600 focus-visible:ring-sky-500" },
-      { variant: "solid", color: "blue", class: "bg-blue-500 text-white hover:bg-blue-600 focus-visible:ring-blue-500" },
-      { variant: "solid", color: "red", class: "bg-red-500 text-white hover:bg-red-600 focus-visible:ring-red-500" },
-      { variant: "solid", color: "amber", class: "bg-amber-400 text-black hover:bg-amber-500 focus-visible:ring-amber-400" },
-      { variant: "solid", color: "black", class: "bg-gray-900 text-white hover:bg-gray-800 focus-visible:ring-gray-900 dark:bg-white dark:text-gray-900 dark:hover:bg-gray-100" },
+      // solid + color — light: border lighter than bg, dark: border darker than bg
+      { variant: "solid", color: "accent", class: "bg-rose-500 text-white border-rose-400 hover:bg-rose-600 dark:border-rose-600 focus-visible:ring-rose-500" },
+      { variant: "solid", color: "blue", class: "bg-blue-500 text-white border-blue-400 hover:bg-blue-600 dark:border-blue-600 focus-visible:ring-blue-500" },
+      { variant: "solid", color: "red", class: "bg-red-500 text-white border-red-400 hover:bg-red-600 dark:border-red-600 focus-visible:ring-red-500" },
+      { variant: "solid", color: "amber", class: "bg-amber-400 text-black border-amber-300 hover:bg-amber-500 dark:border-amber-500 focus-visible:ring-amber-400" },
+      { variant: "solid", color: "black", class: "bg-gray-900 text-white border-gray-700 hover:bg-gray-800 focus-visible:ring-gray-900 dark:bg-white dark:text-gray-900 dark:border-gray-200 dark:hover:bg-gray-100" },
       // soft + color
-      { variant: "soft", color: "accent", class: "bg-sky-100 text-sky-700 hover:bg-sky-200 dark:bg-sky-900/30 dark:text-sky-300 dark:hover:bg-sky-900/50 focus-visible:ring-sky-500" },
-      { variant: "soft", color: "blue", class: "bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50 focus-visible:ring-blue-500" },
-      { variant: "soft", color: "red", class: "bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50 focus-visible:ring-red-500" },
-      { variant: "soft", color: "amber", class: "bg-amber-100 text-amber-700 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:hover:bg-amber-900/50 focus-visible:ring-amber-400" },
-      { variant: "soft", color: "black", class: "bg-gray-100 text-gray-800 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700 focus-visible:ring-gray-500" },
+      { variant: "soft", color: "accent", class: "bg-rose-100 text-rose-700 border-rose-200 hover:bg-rose-200 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-800/60 dark:hover:bg-rose-900/50 focus-visible:ring-rose-500" },
+      { variant: "soft", color: "blue", class: "bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800/60 dark:hover:bg-blue-900/50 focus-visible:ring-blue-500" },
+      { variant: "soft", color: "red", class: "bg-red-100 text-red-700 border-red-200 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/60 dark:hover:bg-red-900/50 focus-visible:ring-red-500" },
+      { variant: "soft", color: "amber", class: "bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800/60 dark:hover:bg-amber-900/50 focus-visible:ring-amber-400" },
+      { variant: "soft", color: "black", class: "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-700 focus-visible:ring-gray-500" },
       // ghost + color
-      { variant: "ghost", color: "accent", class: "text-sky-600 hover:bg-sky-50 dark:text-sky-400 dark:hover:bg-sky-900/20 focus-visible:ring-sky-500" },
+      { variant: "ghost", color: "accent", class: "text-rose-600 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-900/20 focus-visible:ring-rose-500" },
       { variant: "ghost", color: "blue", class: "text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/20 focus-visible:ring-blue-500" },
       { variant: "ghost", color: "red", class: "text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 focus-visible:ring-red-500" },
       { variant: "ghost", color: "amber", class: "text-amber-600 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-900/20 focus-visible:ring-amber-400" },
       { variant: "ghost", color: "black", class: "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus-visible:ring-gray-500" },
       // outline + color
-      { variant: "outline", color: "accent", class: "border-sky-500 text-sky-600 hover:bg-sky-50 dark:text-sky-400 dark:hover:bg-sky-900/20 focus-visible:ring-sky-500" },
-      { variant: "outline", color: "blue", class: "border-blue-500 text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/20 focus-visible:ring-blue-500" },
-      { variant: "outline", color: "red", class: "border-red-500 text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 focus-visible:ring-red-500" },
-      { variant: "outline", color: "amber", class: "border-amber-400 text-amber-600 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-900/20 focus-visible:ring-amber-400" },
-      { variant: "outline", color: "black", class: "border-gray-800 text-gray-700 hover:bg-gray-50 dark:border-gray-400 dark:text-gray-300 dark:hover:bg-gray-800 focus-visible:ring-gray-500" },
+      { variant: "outline", color: "accent", class: "border-rose-300 text-rose-600 hover:bg-rose-50 dark:border-rose-700 dark:text-rose-400 dark:hover:bg-rose-900/20 focus-visible:ring-rose-500" },
+      { variant: "outline", color: "blue", class: "border-blue-300 text-blue-600 hover:bg-blue-50 dark:border-blue-700 dark:text-blue-400 dark:hover:bg-blue-900/20 focus-visible:ring-blue-500" },
+      { variant: "outline", color: "red", class: "border-red-300 text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/20 focus-visible:ring-red-500" },
+      { variant: "outline", color: "amber", class: "border-amber-300 text-amber-600 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20 focus-visible:ring-amber-400" },
+      { variant: "outline", color: "black", class: "border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800 focus-visible:ring-gray-500" },
     ],
     defaultVariants: {
       variant: "solid",
@@ -128,34 +128,47 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-loading={loading || undefined}
         {...props}
       >
-        {loading && <Spinner />}
+        {/* Always in DOM — animates margin-left to drive parent width */}
+        <span
+          aria-hidden
+          style={{
+            display: "inline-flex",
+            overflow: "hidden",
+            flexShrink: 0,
+            maxWidth: loading ? 14 : 0,
+            marginRight: loading ? 0 : -6, // -6px cancels gap-1.5 when hidden
+            opacity: loading ? 1 : 0,
+            transition: [
+              "max-width 200ms cubic-bezier(0,0.55,0.45,1)",
+              "margin-right 200ms cubic-bezier(0,0.55,0.45,1)",
+              "opacity 150ms",
+            ].join(", "),
+          }}
+        >
+          <SpinnerSvg />
+        </span>
         {children}
       </Comp>
     );
   }
 );
 
-function Spinner() {
+function SpinnerSvg() {
   return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 14 14"
-      fill="none"
-      aria-hidden
-      style={{
-        animation: "sky-spin 0.75s linear infinite",
-        flexShrink: 0,
-      }}
-    >
-      <style>{`
-        @keyframes sky-spin {
-          to { transform: rotate(360deg); }
-        }
-      `}</style>
-      <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
-      <path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
+    <>
+      <style>{`@keyframes gulaab-spin { to { transform: rotate(360deg); } }`}</style>
+      <svg
+        width="14"
+        height="14"
+        viewBox="0 0 14 14"
+        fill="none"
+        aria-hidden
+        style={{ animation: "gulaab-spin 0.75s linear infinite", flexShrink: 0 }}
+      >
+        <circle cx="7" cy="7" r="5.5" stroke="currentColor" strokeWidth="1.5" strokeOpacity="0.3" />
+        <path d="M7 1.5A5.5 5.5 0 0 1 12.5 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+      </svg>
+    </>
   );
 }
 

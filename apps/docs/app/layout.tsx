@@ -1,6 +1,15 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Khand } from "next/font/google";
 import "./globals.css";
+
+
+const khand = Khand({
+  weight: ["600", "700"],
+  subsets: ["devanagari", "latin"],
+  variable: "--font-khand",
+  display: "swap",
+});
 
 const openRunde = localFont({
   src: [
@@ -14,7 +23,7 @@ const openRunde = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sky UI",
+  title: "Gulaab",
   description: "A detail-obsessed React component library.",
 };
 
@@ -22,7 +31,7 @@ export const metadata: Metadata = {
 const themeScript = `
 (function() {
   try {
-    var stored = localStorage.getItem('sky-theme');
+    var stored = localStorage.getItem('gulaab-theme');
     var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     var dark = stored === 'dark';
     if (dark) document.documentElement.classList.add('dark');
@@ -34,7 +43,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={openRunde.variable}>
+    <html lang="en" suppressHydrationWarning className={`${openRunde.variable} ${khand.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
