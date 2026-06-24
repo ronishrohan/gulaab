@@ -29,7 +29,7 @@ export function Sidebar() {
         display: "flex",
         flexDirection: "column",
         paddingRight: 16,
-        paddingBottom: 32,
+        paddingBottom: 120,
         paddingTop: 120,
       }}
     >

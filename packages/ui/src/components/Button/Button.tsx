@@ -13,9 +13,8 @@ const buttonVariants = cva(
     "duration-[80ms] ease-[cubic-bezier(0,0.55,0.45,1)]",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-40",
-    // Press: scale down + darken in light mode, brighten in dark mode
+    // Press: scale down + brighten in dark mode
     "active:scale-[0.97]",
-    "active:[filter:brightness(0.88)]",
     "dark:active:[filter:brightness(1.15)]",
     // Focus matches press brightness (subtle, not just ring)
     "focus-visible:[filter:brightness(0.92)]",
@@ -45,30 +44,30 @@ const buttonVariants = cva(
       },
     },
     compoundVariants: [
-      // solid + color — light: border lighter than bg, dark: border darker than bg
-      { variant: "solid", color: "accent", class: "bg-rose-500 text-white border-rose-400 hover:bg-rose-600 dark:border-rose-600 focus-visible:ring-rose-500" },
-      { variant: "solid", color: "blue", class: "bg-blue-500 text-white border-blue-400 hover:bg-blue-600 dark:border-blue-600 focus-visible:ring-blue-500" },
-      { variant: "solid", color: "red", class: "bg-red-500 text-white border-red-400 hover:bg-red-600 dark:border-red-600 focus-visible:ring-red-500" },
-      { variant: "solid", color: "amber", class: "bg-amber-400 text-black border-amber-300 hover:bg-amber-500 dark:border-amber-500 focus-visible:ring-amber-400" },
-      { variant: "solid", color: "black", class: "bg-gray-900 text-white border-gray-700 hover:bg-gray-800 focus-visible:ring-gray-900 dark:bg-white dark:text-gray-900 dark:border-gray-200 dark:hover:bg-gray-100" },
-      // soft + color
-      { variant: "soft", color: "accent", class: "bg-rose-100 text-rose-700 border-rose-200 hover:bg-rose-200 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-800/60 dark:hover:bg-rose-900/50 focus-visible:ring-rose-500" },
-      { variant: "soft", color: "blue", class: "bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800/60 dark:hover:bg-blue-900/50 focus-visible:ring-blue-500" },
-      { variant: "soft", color: "red", class: "bg-red-100 text-red-700 border-red-200 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/60 dark:hover:bg-red-900/50 focus-visible:ring-red-500" },
-      { variant: "soft", color: "amber", class: "bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-200 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800/60 dark:hover:bg-amber-900/50 focus-visible:ring-amber-400" },
-      { variant: "soft", color: "black", class: "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-700 focus-visible:ring-gray-500" },
-      // ghost + color
-      { variant: "ghost", color: "accent", class: "text-rose-600 hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-rose-900/20 focus-visible:ring-rose-500" },
-      { variant: "ghost", color: "blue", class: "text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/20 focus-visible:ring-blue-500" },
-      { variant: "ghost", color: "red", class: "text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 focus-visible:ring-red-500" },
-      { variant: "ghost", color: "amber", class: "text-amber-600 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-900/20 focus-visible:ring-amber-400" },
-      { variant: "ghost", color: "black", class: "text-gray-700 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800 focus-visible:ring-gray-500" },
-      // outline + color
-      { variant: "outline", color: "accent", class: "border-rose-300 text-rose-600 hover:bg-rose-50 dark:border-rose-700 dark:text-rose-400 dark:hover:bg-rose-900/20 focus-visible:ring-rose-500" },
-      { variant: "outline", color: "blue", class: "border-blue-300 text-blue-600 hover:bg-blue-50 dark:border-blue-700 dark:text-blue-400 dark:hover:bg-blue-900/20 focus-visible:ring-blue-500" },
-      { variant: "outline", color: "red", class: "border-red-300 text-red-600 hover:bg-red-50 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/20 focus-visible:ring-red-500" },
-      { variant: "outline", color: "amber", class: "border-amber-300 text-amber-600 hover:bg-amber-50 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20 focus-visible:ring-amber-400" },
-      { variant: "outline", color: "black", class: "border-gray-300 text-gray-700 hover:bg-gray-50 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800 focus-visible:ring-gray-500" },
+      // solid + color — brightness filter darkens on press (works well on saturated colors)
+      { variant: "solid", color: "accent", class: "bg-rose-500 text-white border-rose-400 hover:bg-rose-600 active:[filter:brightness(0.88)] dark:border-rose-600 focus-visible:ring-rose-500" },
+      { variant: "solid", color: "blue", class: "bg-blue-500 text-white border-blue-400 hover:bg-blue-600 active:[filter:brightness(0.88)] dark:border-blue-600 focus-visible:ring-blue-500" },
+      { variant: "solid", color: "red", class: "bg-red-500 text-white border-red-400 hover:bg-red-600 active:[filter:brightness(0.88)] dark:border-red-600 focus-visible:ring-red-500" },
+      { variant: "solid", color: "amber", class: "bg-amber-400 text-black border-amber-300 hover:bg-amber-500 active:[filter:brightness(0.88)] dark:border-amber-500 focus-visible:ring-amber-400" },
+      { variant: "solid", color: "black", class: "bg-gray-900 text-white border-gray-700 hover:bg-gray-800 active:[filter:brightness(0.88)] focus-visible:ring-gray-900 dark:bg-white dark:text-gray-900 dark:border-gray-200 dark:hover:bg-gray-100" },
+      // soft + color — active bg one shade deeper than hover
+      { variant: "soft", color: "accent", class: "bg-rose-100 text-rose-700 border-rose-200 hover:bg-rose-200 active:bg-rose-300 dark:bg-rose-900/30 dark:text-rose-300 dark:border-rose-800/60 dark:hover:bg-rose-900/50 focus-visible:ring-rose-500" },
+      { variant: "soft", color: "blue", class: "bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200 active:bg-blue-300 dark:bg-blue-900/30 dark:text-blue-300 dark:border-blue-800/60 dark:hover:bg-blue-900/50 focus-visible:ring-blue-500" },
+      { variant: "soft", color: "red", class: "bg-red-100 text-red-700 border-red-200 hover:bg-red-200 active:bg-red-300 dark:bg-red-900/30 dark:text-red-300 dark:border-red-800/60 dark:hover:bg-red-900/50 focus-visible:ring-red-500" },
+      { variant: "soft", color: "amber", class: "bg-amber-100 text-amber-700 border-amber-200 hover:bg-amber-200 active:bg-amber-300 dark:bg-amber-900/30 dark:text-amber-300 dark:border-amber-800/60 dark:hover:bg-amber-900/50 focus-visible:ring-amber-400" },
+      { variant: "soft", color: "black", class: "bg-gray-100 text-gray-800 border-gray-200 hover:bg-gray-200 active:bg-gray-300 dark:bg-gray-800 dark:text-gray-100 dark:border-gray-700 dark:hover:bg-gray-700 focus-visible:ring-gray-500" },
+      // ghost + color — active bg one shade deeper than hover
+      { variant: "ghost", color: "accent", class: "text-rose-600 hover:bg-rose-100 active:bg-rose-200 dark:text-rose-400 dark:hover:bg-rose-900/20 focus-visible:ring-rose-500" },
+      { variant: "ghost", color: "blue", class: "text-blue-600 hover:bg-blue-100 active:bg-blue-200 dark:text-blue-400 dark:hover:bg-blue-900/20 focus-visible:ring-blue-500" },
+      { variant: "ghost", color: "red", class: "text-red-600 hover:bg-red-100 active:bg-red-200 dark:text-red-400 dark:hover:bg-red-900/20 focus-visible:ring-red-500" },
+      { variant: "ghost", color: "amber", class: "text-amber-600 hover:bg-amber-100 active:bg-amber-200 dark:text-amber-400 dark:hover:bg-amber-900/20 focus-visible:ring-amber-400" },
+      { variant: "ghost", color: "black", class: "text-gray-700 hover:bg-gray-100 active:bg-gray-200 dark:text-gray-300 dark:hover:bg-gray-800 focus-visible:ring-gray-500" },
+      // outline + color — active bg one shade deeper than hover
+      { variant: "outline", color: "accent", class: "border-rose-300 text-rose-600 hover:bg-rose-100 active:bg-rose-200 dark:border-rose-700 dark:text-rose-400 dark:hover:bg-rose-900/20 focus-visible:ring-rose-500" },
+      { variant: "outline", color: "blue", class: "border-blue-300 text-blue-600 hover:bg-blue-100 active:bg-blue-200 dark:border-blue-700 dark:text-blue-400 dark:hover:bg-blue-900/20 focus-visible:ring-blue-500" },
+      { variant: "outline", color: "red", class: "border-red-300 text-red-600 hover:bg-red-100 active:bg-red-200 dark:border-red-700 dark:text-red-400 dark:hover:bg-red-900/20 focus-visible:ring-red-500" },
+      { variant: "outline", color: "amber", class: "border-amber-300 text-amber-600 hover:bg-amber-100 active:bg-amber-200 dark:border-amber-700 dark:text-amber-400 dark:hover:bg-amber-900/20 focus-visible:ring-amber-400" },
+      { variant: "outline", color: "black", class: "border-gray-300 text-gray-700 hover:bg-gray-50 active:bg-gray-100 dark:border-gray-600 dark:text-gray-300 dark:hover:bg-gray-800 focus-visible:ring-gray-500" },
     ],
     defaultVariants: {
       variant: "solid",
@@ -89,6 +88,16 @@ export interface ButtonProps
   loading?: boolean;
   render?: React.ReactElement;
 }
+
+// Left padding per size (must match the px-* values in size variants).
+// Used to equalize the spinner's left space with the gap (gap-1.5 = 6px).
+const SIZE_PADDING: Record<ButtonSize, number> = {
+  micro: 6,
+  tiny: 8,
+  small: 10,
+  medium: 12,
+  large: 16,
+};
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (
@@ -120,6 +129,8 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
     const Comp = asChild ? Slot : "button";
 
+    const spinnerOffset = SIZE_PADDING[size ?? "medium"] - 6;
+
     return (
       <Comp
         ref={ref}
@@ -136,10 +147,12 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             overflow: "hidden",
             flexShrink: 0,
             maxWidth: loading ? 14 : 0,
+            marginLeft: loading ? -spinnerOffset : 0,
             marginRight: loading ? 0 : -6, // -6px cancels gap-1.5 when hidden
             opacity: loading ? 1 : 0,
             transition: [
               "max-width 200ms cubic-bezier(0,0.55,0.45,1)",
+              "margin-left 200ms cubic-bezier(0,0.55,0.45,1)",
               "margin-right 200ms cubic-bezier(0,0.55,0.45,1)",
               "opacity 150ms",
             ].join(", "),

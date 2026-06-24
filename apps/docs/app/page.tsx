@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Sidebar } from "@/components/Sidebar";
 import { SoundButton } from "@/components/SoundButton";
+import { AnimatingText } from "@/components/AnimatingText";
 
 function HeroCard() {
   const [phase, setPhase] = useState<"idle" | "loading" | "done">("idle");
@@ -35,8 +36,18 @@ function HeroCard() {
         loading={phase === "loading"}
         onClick={handleClick}
         soundVariant="solid"
+        className="border-0 ring-1 ring-[oklch(0.76_0.19_12.59)]"
       >
-        {phase === "done" ? "✓  Order confirmed" : "Pay $24.00"}
+        <AnimatingText>
+          {phase === "done" ? (
+            <>
+              <span style={{ marginRight: 6 }}>✓</span>
+              Uploaded
+            </>
+          ) : (
+            "Upload"
+          )}
+        </AnimatingText>
       </SoundButton>
     </div>
   );
