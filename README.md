@@ -1,16 +1,17 @@
-# गुलाब
+# gulaab
 
-a detail-obsessed react component library. things that thock.
+a small React component library for buttons and interaction details.
 
-gulaab (गुलाब, hindi for rose) is a design system built around one idea: how things feel matters as much as how they look. every button press has a sound. every state change has motion. every spacing decision has a reason.
+Gulaab means rose in Hindi. Right now the library is small: a button component, a docs app, a few tokens, and some interaction work around loading, hover, press, dark mode, and sound.
 
-the accent is rose. the type is open runde. the backgrounds are warm. the borders are transparent. the philosophy is swiss-caliber precision with warmth, color, and personality on top.
+This is not trying to be a huge design system. I mostly want the defaults to feel right and stay consistent.
 
 ## what's inside
 
-- **button** — four variants (solid, soft, ghost, outline), five colors (accent, blue, red, amber, black), five sizes (micro → large), loading state with smooth spinner animation, programmatic sound feedback per variant
-- **design tokens** — css custom properties for colors, spacing, radius, easing, and duration. light and dark mode. no raw hex in components.
-- **sound design** — programmatic web audio api synthesis. four sound profiles matched to button variants. subtle enough you barely notice, but you'd miss it if it was gone. disabled on mobile and when `prefers-reduced-motion` is active.
+- **button** - variants, sizes, colors, loading state, and disabled state
+- **docs app** - a small Next.js page for trying the components
+- **sound** - synthesized in the browser, low gain, disabled on mobile and reduced motion
+- **tokens** - colors, radius, spacing, easing, and duration values used by the components
 
 ## install
 
@@ -24,7 +25,7 @@ pnpm add @gulaab/ui
 import { Button } from "@gulaab/ui";
 
 function Example() {
-  return <Button variant="solid" color="accent">thock me</Button>;
+  return <Button variant="solid" color="accent">Upload</Button>;
 }
 ```
 
@@ -34,23 +35,22 @@ import the styles too:
 import "@gulaab/ui/styles";
 ```
 
-## design principles
+## notes
 
-1. **feel first.** motion is first-class. sound is first-class. every interaction responds.
-2. **precision with warmth.** off-white backgrounds, transparent borders, rounded type. not clinical.
-3. **four colors max.** background, text, border, one accent. if you're reaching for a fifth, remove something.
-4. **equal spacing.** when an icon sits next to text, its left space equals its gap to the text. no exceptions.
-5. **concentric radius.** outer radius = inner radius + padding. if they don't match, it feels off.
-6. **no `transition: all`.** ever. specify the exact properties.
+- Keep color use limited. Background, text, border, one accent is usually enough.
+- Don't use `transition: all`.
+- If an icon sits next to text, make the spacing look even.
+- Respect `prefers-reduced-motion`.
+- Keep sounds quiet and easy to disable.
 
-the full design reference lives in [`DESIGN.md`](./DESIGN.md). it's long, opinionated, and every rule exists because breaking it made something feel wrong.
+The component rules are in [`DESIGN.md`](./DESIGN.md).
 
 ## monorepo
 
 ```
 gulaab/
-├── packages/ui/      → @gulaab/ui (the component library)
-└── apps/docs/        → next.js showcase (what you're looking at)
+├── packages/ui/      -> @gulaab/ui
+└── apps/docs/        -> docs app
 ```
 
 ## dev
@@ -59,10 +59,6 @@ gulaab/
 pnpm install
 pnpm dev
 ```
-
-## the name
-
-गुलाब. rose. because the accent is rose. because it sounds nice. because bengaluru.
 
 ---
 

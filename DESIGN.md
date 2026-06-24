@@ -1,26 +1,14 @@
-# Gulaab Design System
+# Gulaab component notes
 
-> This document is the authoritative design reference for all coding agents working on Gulaab. Read it fully before writing any component, page, or style. Every decision here has a reason — don't override it without understanding why.
+> Working notes for Gulaab components. Read this before changing component styles or adding new components.
 
 ---
 
-## 1. Philosophy
+## 1. Direction
 
-Gulaab takes quality cues from Swiss International Typographic Style, but is not a Swiss design system. Swiss design establishes a caliber: mathematical precision, purposeful hierarchy, generous white space, nothing decorative that isn't also functional. We operate at that caliber and diverge freely from there — with personality, color, motion, and sound.
+Gulaab is small on purpose. Keep the defaults clear, consistent, and easy to reason about.
 
-**What we borrow from Swiss design:**
-- Grid discipline: every layout sits on the same invisible structure
-- Typographic hierarchy: size + weight do the work, not variety
-- White space as a material: space is earned, not leftover
-- Reduction: remove until the next removal costs clarity
-
-**What we add beyond it:**
-- Rose as the primary color identity (Swiss design avoided color personality)
-- Microinteractions and motion as a first-class concern (Swiss print design had none)
-- Sound feedback for interactive elements
-- Warmth: off-white backgrounds instead of clinical white
-
-**The guiding question for every design decision:** Does this help the user, or does it prove a designer was here?
+Use the rose accent for interactive states. Keep backgrounds warm, borders quiet, and motion short. If a visual detail does not make the component clearer or easier to use, remove it.
 
 ---
 
@@ -30,13 +18,13 @@ Gulaab takes quality cues from Swiss International Typographic Style, but is not
 
 | Token | Value | Usage |
 |---|---|---|
-| `--bg` | `#F6F5F0` | Page background — warm off-white, not pure white |
+| `--bg` | `#F6F5F0` | Page background, warm off-white, not pure white |
 | `--bg-subtle` | `#EEECEA` | Cards, panels, code blocks |
 | `--bg-hover` | `#E8E6E1` | Hover state on surfaces |
 | `--text` | `#111110` | Primary text |
 | `--text-2` | `#706F6B` | Secondary text, descriptions |
 | `--text-3` | `#9E9B96` | Placeholder, muted labels |
-| `--border` | `rgba(0,0,0,0.08)` | Default borders — never use a solid color |
+| `--border` | `rgba(0,0,0,0.08)` | Default borders, never use a solid color |
 | `--border-strong` | `rgba(0,0,0,0.15)` | Emphasized borders |
 | `--shadow` | `0 1px 2px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.06)` | Card depth |
 
@@ -44,7 +32,7 @@ Gulaab takes quality cues from Swiss International Typographic Style, but is not
 
 | Token | Value | Usage |
 |---|---|---|
-| `--bg` | `#111110` | Page background — warm dark, not pure black |
+| `--bg` | `#111110` | Page background, warm dark, not pure black |
 | `--bg-subtle` | `#1A1A18` | Cards, panels |
 | `--bg-hover` | `#222220` | Hover state on surfaces |
 | `--text` | `#EDEDEC` | Primary text |
@@ -66,24 +54,16 @@ Uses Tailwind's `rose` palette. The semantic tokens:
 | `--accent-text` | `rose-700 (#BE123C)` | `rose-300 (#FDA4AF)` |
 
 ### Rules
-- Never use raw hex values in components. Always reference a token.
-- The `--border` token must be a transparent/alpha value so it adapts to any background.
+- Do not use raw hex values in components. Reference a token.
+- The `--border` token must be transparent/alpha so it adapts to any background.
 - Accent color appears only on interactive elements and their states. Not as decoration.
-- Limit color use: background, text, border, one accent. That's four. If you're reaching for a fifth, remove something.
+- Limit color use: background, text, border, and one accent. Add more only for a real semantic state.
 
 ---
 
 ## 3. Typography
 
-**Font**: Open Runde — a soft, rounded variant of Inter. Already loaded as `--font-open-runde`.
-
-```css
-font-family: var(--font-open-runde), system-ui, -apple-system, sans-serif;
--webkit-font-smoothing: antialiased;
--moz-osx-font-smoothing: grayscale;
-```
-
-### Type Scale (Swiss-caliber ratio: 1.25)
+### Type Scale
 
 | Name | Size | Line height | Letter spacing | Weight | Use |
 |---|---|---|---|---|---|
@@ -99,7 +79,7 @@ font-family: var(--font-open-runde), system-ui, -apple-system, sans-serif;
 ### Rules
 - Use `text-wrap: balance` on all headings.
 - Use `text-wrap: pretty` on multi-line body text to prevent orphans.
-- Weight carries hierarchy — not variety. One family, weight + size = hierarchy.
+- Weight carries hierarchy, not variety. One family, weight + size = hierarchy.
 - Left-aligned, ragged right. Never justified.
 - `font-variant-numeric: tabular-nums` on any number that updates dynamically.
 
@@ -131,14 +111,13 @@ font-family: var(--font-open-runde), system-ui, -apple-system, sans-serif;
 
 ### Rules
 - Define spacing with the scale, never arbitrary values.
-- Give content room to breathe: when in doubt, add more space.
-- Resist filling empty areas. Empty space is design.
+- Do not fill empty space without a reason.
 
 ---
 
 ## 5. Border Radius
 
-**The concentric rule:** `outer radius = inner radius + padding`. Violating this is the single most common reason interfaces feel off.
+Use the concentric rule: `outer radius = inner radius + padding`.
 
 | Token | Value | Use |
 |---|---|---|
@@ -148,13 +127,13 @@ font-family: var(--font-open-runde), system-ui, -apple-system, sans-serif;
 | `--radius-xl` | 16px | Modals, sheets |
 | `--radius-full` | 9999px | Pills, avatars |
 
-If a `--radius-md` button sits inside a `--radius-lg` card with 8px padding: `8 + 8 = 16`... adjust the card to `--radius-xl` or the button to `--radius-sm`. They must be concentric.
+If a `--radius-md` button sits inside a `--radius-lg` card with 8px padding, adjust the card to `--radius-xl` or the button to `--radius-sm`.
 
 ---
 
 ## 6. Motion & Animation
 
-Motion is first-class in Gulaab. Every interactive state has a transition. Animations are interruptible. Nothing is jarring.
+Interactive states should transition. Keep animations short, interruptible, and disabled when the user asks for reduced motion.
 
 ### Easing Curves
 
@@ -179,15 +158,15 @@ Motion is first-class in Gulaab. Every interactive state has a transition. Anima
 
 ### Rules
 - **Never use `transition: all`.** Specify exact properties: `transition-property: transform, opacity, background-color`.
-- **Always use `will-change: transform` sparingly** — only when you observe first-frame stutter, only for `transform`/`opacity`/`filter`.
+- **Always use `will-change: transform` sparingly**, only when you observe first-frame stutter, only for `transform`/`opacity`/`filter`.
 - Interactive state changes use CSS transitions (interruptible). Entrance/exit sequences use keyframes.
 - `prefers-reduced-motion: reduce` must suppress all non-essential motion. Essential = communicates state change.
 - Scale on press: always `scale(0.97)`. Never below `0.95`.
 - Stagger sibling enter animations by 60–80ms per item.
 
-### Button Animation Rules (per plan)
-- **Light mode press/focus:** button darkens — use `brightness(0.88)` or a darkening overlay.
-- **Dark mode press/focus:** button brightens — use `brightness(1.15)` or a lightening overlay.
+### Button Animation Rules
+- **Light mode press/focus:** button darkens with either `brightness(0.88)` or a darker same-color state.
+- **Dark mode press/focus:** button brightens with either `brightness(1.15)` or a lighter same-color state.
 - Transition: `var(--ease-circ) var(--duration-instant)`.
 
 ---
@@ -196,7 +175,7 @@ Motion is first-class in Gulaab. Every interactive state has a transition. Anima
 
 ### Buttons
 - Three props control appearance: `variant` (solid/soft/ghost/outline), `color`, `size`. Variant does not impose color.
-- Loading state: retain color — do not gray out. Only the cursor changes to `not-allowed`. The loader replaces or accompanies the content.
+- Loading state: retain color, do not gray out. Only the cursor changes to `not-allowed`. The loader replaces or accompanies the content.
 - Disabled state: `opacity-40`. Do not change color scheme.
 - Press: `scale(0.97)`. Never lower than `0.95`.
 - Focus ring: 2px, offset 2px, color matches accent.
@@ -221,7 +200,7 @@ Motion is first-class in Gulaab. Every interactive state has a transition. Anima
 - User preference: stored in `localStorage` under `gulaab-theme`. Values: `"light"` | `"dark"` | `"system"`.
 - Toggle applies `.dark` class to `<html>`.
 - **No flash on load**: use an inline script in `<head>` that reads localStorage and sets the class before paint.
-- Transitions between modes: `transition: background-color 200ms var(--ease-smooth), color 200ms var(--ease-smooth)`. Do NOT transition `border` or `box-shadow` — they flicker.
+- Transitions between modes: `transition: background-color 200ms var(--ease-smooth), color 200ms var(--ease-smooth)`. Do NOT transition `border` or `box-shadow`, they flicker.
 
 ### Toggle Component
 - Icon: Sun (light) ↔ Moon (dark).
@@ -231,25 +210,25 @@ Motion is first-class in Gulaab. Every interactive state has a transition. Anima
 
 ---
 
-## 9. Sound Design
+## 9. Sound
 
-Inspired by devouringdetails.com and Raphael Salaja's philosophy ("Why is the Web Afraid of Sound?"), interactive elements have subtle audio feedback.
+Some interactive elements use quiet synthesized sounds.
 
 ### Approach
-- **Programmatic synthesis via Web Audio API.** No audio file dependencies.
+- Programmatic synthesis via Web Audio API. No audio file dependencies.
 - Sounds are extremely subtle: low gain, short decay. If you can clearly hear it, it's too loud.
-- Disable on mobile (mobile OS pauses other audio to play sounds — jarring).
+- Disable on mobile (mobile OS pauses other audio to play sounds, which is jarring).
 - Disable when `prefers-reduced-motion: reduce` is active.
 - User can opt out: check `localStorage.getItem('gulaab-sounds') === 'false'`.
 
 ### Sound Profiles per Button Variant
 
-| Variant | Character | Frequency | Decay | Gain |
-|---|---|---|---|---|
-| `solid` | Confident click | 280Hz | 90ms | 0.25 |
-| `soft` | Gentle tap | 440Hz | 120ms | 0.12 |
-| `ghost` | Air puff | 880Hz | 60ms | 0.06 |
-| `outline` | Crisp snap | 360Hz | 80ms | 0.18 |
+| Variant | Frequency | Decay | Gain |
+|---|---|---|---|
+| `solid` | 280Hz | 90ms | 0.25 |
+| `soft` | 440Hz | 120ms | 0.12 |
+| `ghost` | 880Hz | 60ms | 0.06 |
+| `outline` | 360Hz | 80ms | 0.18 |
 
 All use an `OscillatorNode` (sine) + `GainNode` with exponential ramp to near-zero.
 
@@ -283,14 +262,14 @@ function playUISound(variant: string) {
 
 ## 11. Anti-Patterns
 
-Things that never belong in Gulaab:
+Avoid these:
 
-- `transition: all` — always specify properties
+- `transition: all`, always specify properties
 - Border radius mismatches on nested elements
 - Decoration that isn't also information (gradients for their own sake, icons that repeat label text)
 - More than 4 colors in a single component
 - Animations under 80ms (imperceptible) or over 500ms (feels broken)
-- `border: 1px solid #e5e7eb` — use transparent/alpha borders
+- `border: 1px solid #e5e7eb`, use transparent/alpha borders
 - Justified text
 - Centered-aligned body text blocks
 - Icons without 40×40 hit area

@@ -1,7 +1,7 @@
 {
   "name": "@gulaab/ui",
   "version": "0.0.1",
-  "description": "a detail-obsessed react component library. things that thock.",
+  "description": "a small React component library for buttons and interaction details.",
   "private": false,
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",

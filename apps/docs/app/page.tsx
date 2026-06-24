@@ -75,7 +75,7 @@ export default function Home() {
           Button
         </h1>
         <p style={{ fontSize: 14, color: "var(--text-3)", marginBottom: 48 }}>
-          buttons that thock. interactions that feel right.
+          Button states, sizes, loading, and sound.
         </p>
 
         <HeroCard />

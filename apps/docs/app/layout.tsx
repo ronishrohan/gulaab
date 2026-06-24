@@ -24,7 +24,7 @@ const openRunde = localFont({
 
 export const metadata: Metadata = {
   title: "Gulaab",
-  description: "a detail-obsessed react component library. things that thock.",
+  description: "a small React component library for buttons and interaction details.",
 };
 
 // No-flash theme script — runs before paint to set .dark class from localStorage
