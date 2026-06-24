@@ -5,9 +5,9 @@ import { cn } from "../../lib/utils";
 
 const buttonVariants = cva(
   [
-    "inline-flex items-center justify-center gap-1.5 cursor-pointer",
+    "inline-flex items-center justify-center gap-2 cursor-pointer",
     "font-medium leading-none select-none whitespace-nowrap",
-    "rounded-md border border-transparent",
+    "rounded-xl border border-transparent",
     // Specific properties only — never transition-all
     "transition-[background-color,border-color,color,transform,filter,opacity,box-shadow]",
     "duration-[80ms] ease-[cubic-bezier(0,0.55,0.45,1)]",
@@ -36,11 +36,11 @@ const buttonVariants = cva(
         black: "",
       },
       size: {
-        micro: "h-5 px-1.5 text-[11px] rounded",
-        tiny: "h-6 px-2 text-xs rounded",
-        small: "h-7 px-2.5 text-sm",
-        medium: "h-8 px-3 text-sm",
-        large: "h-10 px-4 text-base",
+        micro: "h-5 px-2 text-[11px] rounded-lg",
+        tiny: "h-6 px-2.5 text-xs rounded-lg",
+        small: "h-7 px-3 text-sm",
+        medium: "h-8 px-4 text-sm",
+        large: "h-10 px-5 text-base",
       },
     },
     compoundVariants: [
@@ -90,13 +90,13 @@ export interface ButtonProps
 }
 
 // Left padding per size (must match the px-* values in size variants).
-// Used to equalize the spinner's left space with the gap (gap-1.5 = 6px).
+// Used to equalize the spinner's left space with the gap (gap-2 = 8px).
 const SIZE_PADDING: Record<ButtonSize, number> = {
-  micro: 6,
-  tiny: 8,
-  small: 10,
-  medium: 12,
-  large: 16,
+  micro: 8,
+  tiny: 10,
+  small: 12,
+  medium: 16,
+  large: 20,
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -148,7 +148,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
             flexShrink: 0,
             maxWidth: loading ? 14 : 0,
             marginLeft: loading ? -spinnerOffset : 0,
-            marginRight: loading ? 0 : -6, // -6px cancels gap-1.5 when hidden
+            marginRight: loading ? 0 : -8, // -8px cancels gap-2 when hidden
             opacity: loading ? 1 : 0,
             transition: [
               "max-width 200ms cubic-bezier(0,0.55,0.45,1)",

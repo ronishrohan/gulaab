@@ -38,15 +38,9 @@ function HeroCard() {
         soundVariant="solid"
         className="border-0 ring-1 ring-[oklch(0.76_0.19_12.59)]"
       >
+        {phase === "done" && <span aria-hidden style={{ marginLeft: -8, flexShrink: 0 }}>✓</span>}
         <AnimatingText>
-          {phase === "done" ? (
-            <>
-              <span style={{ marginRight: 6 }}>✓</span>
-              Uploaded
-            </>
-          ) : (
-            "Upload"
-          )}
+          {phase === "done" ? "Uploaded" : "Upload"}
         </AnimatingText>
       </SoundButton>
     </div>
