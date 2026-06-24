@@ -1,6 +1,7 @@
 {
   "name": "gulaab",
   "private": true,
+  "description": "a detail-obsessed react component library. things that thock.",
   "scripts": {
     "build": "pnpm -r build",
     "dev": "pnpm -r --parallel dev",

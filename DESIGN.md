@@ -1,12 +1,12 @@
-# Sky UI Design System
+# Gulaab Design System
 
-> This document is the authoritative design reference for all coding agents working on Sky UI. Read it fully before writing any component, page, or style. Every decision here has a reason — don't override it without understanding why.
+> This document is the authoritative design reference for all coding agents working on Gulaab. Read it fully before writing any component, page, or style. Every decision here has a reason — don't override it without understanding why.
 
 ---
 
 ## 1. Philosophy
 
-Sky UI takes quality cues from Swiss International Typographic Style, but is not a Swiss design system. Swiss design establishes a caliber: mathematical precision, purposeful hierarchy, generous white space, nothing decorative that isn't also functional. We operate at that caliber and diverge freely from there — with personality, color, motion, and sound.
+Gulaab takes quality cues from Swiss International Typographic Style, but is not a Swiss design system. Swiss design establishes a caliber: mathematical precision, purposeful hierarchy, generous white space, nothing decorative that isn't also functional. We operate at that caliber and diverge freely from there — with personality, color, motion, and sound.
 
 **What we borrow from Swiss design:**
 - Grid discipline: every layout sits on the same invisible structure
@@ -15,7 +15,7 @@ Sky UI takes quality cues from Swiss International Typographic Style, but is not
 - Reduction: remove until the next removal costs clarity
 
 **What we add beyond it:**
-- Sky-blue as the primary color identity (Swiss design avoided color personality)
+- Rose as the primary color identity (Swiss design avoided color personality)
 - Microinteractions and motion as a first-class concern (Swiss print design had none)
 - Sound feedback for interactive elements
 - Warmth: off-white backgrounds instead of clinical white
@@ -54,16 +54,16 @@ Sky UI takes quality cues from Swiss International Typographic Style, but is not
 | `--border-strong` | `rgba(255,255,255,0.14)` | Emphasized borders |
 | `--shadow` | `0 1px 2px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.06)` | Card depth |
 
-### Sky Blue Accent (Primary)
+### Rose Accent (Primary)
 
-Uses Tailwind's `sky` palette. The semantic tokens:
+Uses Tailwind's `rose` palette. The semantic tokens:
 
 | Token | Light | Dark |
 |---|---|---|
-| `--accent` | `sky-500 (#0EA5E9)` | `sky-400 (#38BDF8)` |
-| `--accent-hover` | `sky-600 (#0284C7)` | `sky-300 (#7DD3FC)` |
-| `--accent-soft` | `sky-100 (#E0F2FE)` | `sky-950/40` |
-| `--accent-text` | `sky-700 (#0369A1)` | `sky-300 (#7DD3FC)` |
+| `--accent` | `rose-500 (#F43F5E)` | `rose-400 (#FB7185)` |
+| `--accent-hover` | `rose-600 (#E11D48)` | `rose-300 (#FDA4AF)` |
+| `--accent-soft` | `rose-100 (#FFE4E6)` | `rose-950/40` |
+| `--accent-text` | `rose-700 (#BE123C)` | `rose-300 (#FDA4AF)` |
 
 ### Rules
 - Never use raw hex values in components. Always reference a token.
@@ -154,7 +154,7 @@ If a `--radius-md` button sits inside a `--radius-lg` card with 8px padding: `8 
 
 ## 6. Motion & Animation
 
-Motion is first-class in Sky UI. Every interactive state has a transition. Animations are interruptible. Nothing is jarring.
+Motion is first-class in Gulaab. Every interactive state has a transition. Animations are interruptible. Nothing is jarring.
 
 ### Easing Curves
 
@@ -218,7 +218,7 @@ Motion is first-class in Sky UI. Every interactive state has a transition. Anima
 ## 8. Dark Mode
 
 - Default: **light** (off-white background).
-- User preference: stored in `localStorage` under `sky-theme`. Values: `"light"` | `"dark"` | `"system"`.
+- User preference: stored in `localStorage` under `gulaab-theme`. Values: `"light"` | `"dark"` | `"system"`.
 - Toggle applies `.dark` class to `<html>`.
 - **No flash on load**: use an inline script in `<head>` that reads localStorage and sets the class before paint.
 - Transitions between modes: `transition: background-color 200ms var(--ease-smooth), color 200ms var(--ease-smooth)`. Do NOT transition `border` or `box-shadow` — they flicker.
@@ -240,7 +240,7 @@ Inspired by devouringdetails.com and Raphael Salaja's philosophy ("Why is the We
 - Sounds are extremely subtle: low gain, short decay. If you can clearly hear it, it's too loud.
 - Disable on mobile (mobile OS pauses other audio to play sounds — jarring).
 - Disable when `prefers-reduced-motion: reduce` is active.
-- User can opt out: check `localStorage.getItem('sky-sounds') === 'false'`.
+- User can opt out: check `localStorage.getItem('gulaab-sounds') === 'false'`.
 
 ### Sound Profiles per Button Variant
 
@@ -258,7 +258,7 @@ All use an `OscillatorNode` (sine) + `GainNode` with exponential ramp to near-ze
 function playUISound(variant: string) {
   if (typeof window === 'undefined') return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if (localStorage.getItem('sky-sounds') === 'false') return;
+  if (localStorage.getItem('gulaab-sounds') === 'false') return;
   if ('ontouchstart' in window) return; // disable mobile
 
   const ctx = new AudioContext();
@@ -283,7 +283,7 @@ function playUISound(variant: string) {
 
 ## 11. Anti-Patterns
 
-Things that never belong in Sky UI:
+Things that never belong in Gulaab:
 
 - `transition: all` — always specify properties
 - Border radius mismatches on nested elements
