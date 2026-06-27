@@ -1,67 +1,79 @@
 "use client";
 
-type SoundVariant = "solid" | "soft" | "ghost" | "outline" | "toggle";
+export type SoundVariant = "press" | "soft" | "confirm" | "toggle" | "error";
 
-const PROFILES: Record<SoundVariant, { freq: number; decay: number; gain: number; type: OscillatorType }> = {
-  solid:   { freq: 280, decay: 0.09, gain: 0.12, type: "sine" },
-  soft:    { freq: 440, decay: 0.12, gain: 0.07, type: "sine" },
-  ghost:   { freq: 360, decay: 0.08, gain: 0.09, type: "sine" },
-  outline: { freq: 880, decay: 0.06, gain: 0.03, type: "sine" },
-  toggle:  { freq: 520, decay: 0.07, gain: 0.06, type: "sine" },
+type SoundProfile = {
+  frequency: number;
+  endFrequency: number;
+  decay: number;
+  gain: number;
+  type: OscillatorType;
 };
 
-function isSoundEnabled(): boolean {
+const PROFILES: Record<SoundVariant, SoundProfile> = {
+  press: { frequency: 520, endFrequency: 320, decay: 0.055, gain: 0.08, type: "sine" },
+  soft: { frequency: 360, endFrequency: 280, decay: 0.075, gain: 0.05, type: "sine" },
+  confirm: { frequency: 620, endFrequency: 920, decay: 0.09, gain: 0.07, type: "triangle" },
+  toggle: { frequency: 420, endFrequency: 560, decay: 0.07, gain: 0.055, type: "sine" },
+  error: { frequency: 180, endFrequency: 120, decay: 0.1, gain: 0.06, type: "triangle" },
+};
+
+let sharedContext: AudioContext | null = null;
+let resumePromise: Promise<void> | null = null;
+
+export function soundEnabled() {
   if (typeof window === "undefined") return false;
-  if ("ontouchstart" in window) return false; // disable mobile
+  if ("ontouchstart" in window) return false;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  return localStorage.getItem("gulaab-sounds") !== "false";
+  return localStorage.getItem("sky-sounds") !== "false";
 }
 
-let sharedCtx: AudioContext | null = null;
-
-function getCtx(): AudioContext | null {
+function getContext() {
   if (typeof AudioContext === "undefined") return null;
-  if (!sharedCtx || sharedCtx.state === "closed") {
-    sharedCtx = new AudioContext();
-  }
-  return sharedCtx;
+  if (!sharedContext || sharedContext.state === "closed") sharedContext = new AudioContext();
+  return sharedContext;
 }
 
-function scheduleSound(ctx: AudioContext, variant: SoundVariant) {
+function schedule(context: AudioContext, variant: SoundVariant) {
   const profile = PROFILES[variant];
-  const now = ctx.currentTime;
-
-  const osc = ctx.createOscillator();
-  const gain = ctx.createGain();
+  const now = context.currentTime;
+  const osc = context.createOscillator();
+  const gain = context.createGain();
 
   osc.type = profile.type;
-  osc.frequency.setValueAtTime(profile.freq, now);
-  osc.frequency.exponentialRampToValueAtTime(profile.freq * 0.85, now + profile.decay);
-
+  osc.frequency.setValueAtTime(profile.frequency, now);
+  osc.frequency.exponentialRampToValueAtTime(Math.max(1, profile.endFrequency), now + profile.decay);
   gain.gain.setValueAtTime(profile.gain, now);
   gain.gain.exponentialRampToValueAtTime(0.001, now + profile.decay);
 
   osc.connect(gain);
-  gain.connect(ctx.destination);
-
+  gain.connect(context.destination);
   osc.start(now);
   osc.stop(now + profile.decay);
+  osc.onended = () => {
+    osc.disconnect();
+    gain.disconnect();
+  };
 }
 
-export function playSound(variant: SoundVariant = "solid") {
-  if (!isSoundEnabled()) return;
+export function playSound(variant: SoundVariant = "press") {
+  if (!soundEnabled()) return;
+  const context = getContext();
+  if (!context) return;
 
-  const ctx = getCtx();
-  if (!ctx) return;
-
-  // Must schedule AFTER resume resolves — currentTime is stale while suspended
-  if (ctx.state === "suspended") {
-    ctx.resume().then(() => scheduleSound(ctx, variant)).catch(() => {});
-  } else {
-    scheduleSound(ctx, variant);
+  if (context.state === "suspended") {
+    resumePromise ??= context.resume().finally(() => {
+      resumePromise = null;
+    });
+    resumePromise.then(() => {
+      if (soundEnabled()) schedule(context, variant);
+    }).catch(() => {});
+    return;
   }
+
+  schedule(context, variant);
 }
 
-export function useSound(variant: SoundVariant = "solid") {
+export function useSound(variant: SoundVariant = "press") {
   return () => playSound(variant);
 }

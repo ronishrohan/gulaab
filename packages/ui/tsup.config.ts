@@ -7,4 +7,5 @@ export default defineConfig({
   clean: true,
   external: ["react", "react-dom"],
   treeshake: true,
+  onSuccess: "node -e \"require('fs').copyFileSync('src/styles.css','dist/styles.css')\"",
 });

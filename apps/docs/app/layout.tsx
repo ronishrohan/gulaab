@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import { Khand } from "next/font/google";
 import "./globals.css";
 
-
 const khand = Khand({
   weight: ["600", "700"],
   subsets: ["devanagari", "latin"],
@@ -23,31 +22,26 @@ const openRunde = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Gulaab",
-  description: "a small React component library for buttons and interaction details.",
+  title: "Sky UI",
+  description: "A light-first React component library with tactile motion and subtle sound.",
 };
 
-// No-flash theme script — runs before paint to set .dark class from localStorage
 const themeScript = `
-(function() {
-  try {
-    var stored = localStorage.getItem('gulaab-theme');
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var dark = stored === 'dark';
-    if (dark) document.documentElement.classList.add('dark');
-  } catch(e) {}
-})();
-`;
++(function() {
++  try {
++    var stored = localStorage.getItem('sky-theme');
++    if (stored === 'dark') document.documentElement.classList.add('dark');
++  } catch(e) {}
++})();
++`.replace(/^\+/gm, "");
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${openRunde.variable} ${khand.variable}`}>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
       </head>
-      <body className="min-h-screen antialiased">{children}</body>
+      <body>{children}</body>
     </html>
   );
 }
