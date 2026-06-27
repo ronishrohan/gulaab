@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "@gulaab/ui/styles";
+@import "../../../packages/ui/src/styles.css";
 @source "../node_modules/@gulaab/ui/src/**/*.tsx";
 
 @custom-variant dark (&:where(.dark, .dark *));
