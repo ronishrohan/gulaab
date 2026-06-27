@@ -18,19 +18,19 @@ const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     const describedBy = [helperId, errorId].filter(Boolean).join(" ") || undefined;
 
     return (
-      <div className="sky-field">
-        {label && <label className="sky-field-label" htmlFor={textareaId}>{label}</label>}
+      <div className="gulaab-field">
+        {label && <label className="gulaab-field-label" htmlFor={textareaId}>{label}</label>}
         <textarea
           ref={ref}
           id={textareaId}
-          className={cn("sky-control", className)}
+          className={cn("gulaab-control", className)}
           data-size={size}
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
           {...props}
         />
-        {helperText && <p className="sky-field-help" id={helperId}>{helperText}</p>}
-        {error && <p className="sky-field-error" id={errorId}>{error}</p>}
+        {helperText && <p className="gulaab-field-help" id={helperId}>{helperText}</p>}
+        {error && <p className="gulaab-field-error" id={errorId}>{error}</p>}
       </div>
     );
   }

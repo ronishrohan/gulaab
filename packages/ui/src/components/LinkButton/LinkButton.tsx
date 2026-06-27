@@ -13,7 +13,7 @@ const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
   ({ className, variant = "link", tone = "primary", size = "medium", disabled = false, ...props }, ref) => (
     <a
       ref={ref}
-      className={cn("sky-link-button", className)}
+      className={cn("gulaab-link-button", className)}
       data-variant={variant}
       data-tone={tone}
       data-size={size}

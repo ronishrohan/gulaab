@@ -15,7 +15,7 @@ export type TooltipContentProps = React.ComponentPropsWithoutRef<typeof TooltipP
 
 const TooltipContent = React.forwardRef<React.ElementRef<typeof TooltipPrimitive.Content>, TooltipContentProps>(
   ({ className, sideOffset = 8, ...props }, ref) => (
-    <TooltipPrimitive.Content ref={ref} sideOffset={sideOffset} className={cn("sky-tooltip", className)} {...props} />
+    <TooltipPrimitive.Content ref={ref} sideOffset={sideOffset} className={cn("gulaab-tooltip", className)} {...props} />
   )
 );
 TooltipContent.displayName = "TooltipContent";

@@ -25,7 +25,7 @@ export function soundEnabled() {
   if (typeof window === "undefined") return false;
   if ("ontouchstart" in window) return false;
   if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return false;
-  return localStorage.getItem("sky-sounds") !== "false";
+  return localStorage.getItem("gulaab-sounds") !== "false";
 }
 
 function getContext() {

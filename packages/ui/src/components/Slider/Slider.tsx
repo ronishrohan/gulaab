@@ -14,15 +14,15 @@ const Slider = React.forwardRef<HTMLInputElement, SliderProps>(
     const helperId = helperText ? `${sliderId}-helper` : undefined;
 
     return (
-      <div className="sky-field">
+      <div className="gulaab-field">
         {(label || valueLabel) && (
-          <div className="sky-slider-row">
-            {label && <label className="sky-field-label" htmlFor={sliderId}>{label}</label>}
+          <div className="gulaab-slider-row">
+            {label && <label className="gulaab-field-label" htmlFor={sliderId}>{label}</label>}
             {valueLabel && <span>{valueLabel}</span>}
           </div>
         )}
-        <input ref={ref} id={sliderId} type="range" className={cn("sky-slider", className)} aria-describedby={helperId} {...props} />
-        {helperText && <p className="sky-field-help" id={helperId}>{helperText}</p>}
+        <input ref={ref} id={sliderId} type="range" className={cn("gulaab-slider", className)} aria-describedby={helperId} {...props} />
+        {helperText && <p className="gulaab-field-help" id={helperId}>{helperText}</p>}
       </div>
     );
   }

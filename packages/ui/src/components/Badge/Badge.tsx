@@ -14,7 +14,7 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
 
 const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
   ({ className, variant = "soft", tone = "primary", size = "medium", ...props }, ref) => (
-    <span ref={ref} className={cn("sky-badge", className)} data-variant={variant} data-tone={tone} data-size={size} {...props} />
+    <span ref={ref} className={cn("gulaab-badge", className)} data-variant={variant} data-tone={tone} data-size={size} {...props} />
   )
 );
 

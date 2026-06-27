@@ -20,13 +20,13 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
     const describedBy = [helperId, errorId].filter(Boolean).join(" ") || undefined;
 
     return (
-      <div className="sky-field">
-        {label && <label className="sky-field-label" htmlFor={selectId}>{label}</label>}
-        <div className="sky-select-wrap">
+      <div className="gulaab-field">
+        {label && <label className="gulaab-field-label" htmlFor={selectId}>{label}</label>}
+        <div className="gulaab-select-wrap">
           <select
             ref={ref}
             id={selectId}
-            className={cn("sky-control sky-select", className)}
+            className={cn("gulaab-control gulaab-select", className)}
             data-size={size}
             aria-invalid={error ? true : undefined}
             aria-describedby={describedBy}
@@ -35,8 +35,8 @@ const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
             {children}
           </select>
         </div>
-        {helperText && <p className="sky-field-help" id={helperId}>{helperText}</p>}
-        {error && <p className="sky-field-error" id={errorId}>{error}</p>}
+        {helperText && <p className="gulaab-field-help" id={helperId}>{helperText}</p>}
+        {error && <p className="gulaab-field-error" id={errorId}>{error}</p>}
       </div>
     );
   }

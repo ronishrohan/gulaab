@@ -13,8 +13,8 @@ const Progress = React.forwardRef<HTMLDivElement, ProgressProps>(({ className, v
   const pct = (clampedValue / safeMax) * 100;
 
   return (
-    <div ref={ref} className={cn("sky-progress", className)} role="progressbar" aria-valuemin={0} aria-valuemax={safeMax} aria-valuenow={clampedValue} aria-label={label} {...props}>
-      <div className="sky-progress-bar" style={{ width: `${pct}%` }} />
+    <div ref={ref} className={cn("gulaab-progress", className)} role="progressbar" aria-valuemin={0} aria-valuemax={safeMax} aria-valuenow={clampedValue} aria-label={label} {...props}>
+      <div className="gulaab-progress-bar" style={{ width: `${pct}%` }} />
     </div>
   );
 });

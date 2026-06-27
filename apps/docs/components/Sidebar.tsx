@@ -11,9 +11,9 @@ export function Sidebar() {
 
   return (
     <aside className="docs-sidebar">
-      <Link className="docs-logo" href="/" aria-label="Sky UI home">
+      <Link className="docs-logo" href="/" aria-label="Gulaab home">
         <span className="docs-logo-mark" aria-hidden="true" />
-        <span className="docs-logo-text">Sky</span>
+        <span className="docs-logo-text">गुलाब</span>
       </Link>
 
       <div className="docs-nav-group">

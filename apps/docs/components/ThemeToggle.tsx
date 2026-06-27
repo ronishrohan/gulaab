@@ -7,12 +7,12 @@ import { Button, Kbd } from "@gulaab/ui";
 
 type Theme = "light" | "dark";
 
-const THEME_EVENT = "sky-theme-change";
+const THEME_EVENT = "gulaab-theme-change";
 
 function getThemeSnapshot(): Theme {
   if (typeof window === "undefined") return "light";
   try {
-    return localStorage.getItem("sky-theme") === "dark" ? "dark" : "light";
+    return localStorage.getItem("gulaab-theme") === "dark" ? "dark" : "light";
   } catch {
     return document.documentElement.classList.contains("dark") ? "dark" : "light";
   }
@@ -29,7 +29,7 @@ function subscribeTheme(callback: () => void) {
 
 function storeTheme(theme: Theme) {
   try {
-    localStorage.setItem("sky-theme", theme);
+    localStorage.setItem("gulaab-theme", theme);
   } finally {
     document.documentElement.classList.toggle("dark", theme === "dark");
     window.dispatchEvent(new Event(THEME_EVENT));

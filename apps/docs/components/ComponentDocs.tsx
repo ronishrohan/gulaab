@@ -57,7 +57,7 @@ function PageFrame({ title, description, hero, sections, soundRelevant }: PageCo
       <main className="docs-main">
         <article className="docs-page">
           <header className="docs-hero">
-            <p className="docs-kicker">Sky UI</p>
+            <p className="docs-kicker">Gulaab</p>
             <h1 className="docs-title">{title}</h1>
             <p className="docs-description">{description}</p>
           </header>
@@ -102,9 +102,9 @@ function PageFrame({ title, description, hero, sections, soundRelevant }: PageCo
 function FieldGrid() {
   return (
     <div className="docs-grid">
-      <TextField label="Project" placeholder="Sky interface" helperText="Labels stay above fields." />
-      <TextField label="Email" type="email" defaultValue="hello@sky.test" />
-      <TextField label="Handle" error="Use lowercase letters only." defaultValue="Sky" />
+      <TextField label="Project" placeholder="Gulaab interface" helperText="Labels stay above fields." />
+      <TextField label="Email" type="email" defaultValue="hello@gulaab.test" />
+      <TextField label="Handle" error="Use lowercase letters only." defaultValue="Gulaab" />
     </div>
   );
 }
@@ -126,7 +126,7 @@ const pages: Record<string, PageConfig> = {
     description: "A tactile pressable for primary actions, quiet actions, loading states, and optional sound feedback.",
     hero: <SoundButton loading={false}><CloudArrowUp size={17} aria-hidden="true" />Upload</SoundButton>,
     sections: [
-      { title: "Variants", description: "One sky accent, four useful treatments.", content: <div className="docs-row"><SoundButton variant="solid">Solid</SoundButton><SoundButton variant="soft">Soft</SoundButton><SoundButton variant="outline">Outline</SoundButton><SoundButton variant="ghost">Ghost</SoundButton></div> },
+      { title: "Variants", description: "One Gulaab accent, four useful treatments.", content: <div className="docs-row"><SoundButton variant="solid">Solid</SoundButton><SoundButton variant="soft">Soft</SoundButton><SoundButton variant="outline">Outline</SoundButton><SoundButton variant="ghost">Ghost</SoundButton></div> },
       { title: "Tones", description: "Neutral and functional tones exist for meaning, not decoration.", content: <div className="docs-row"><Button tone="primary">Primary</Button><Button tone="neutral">Neutral</Button><Button tone="danger">Danger</Button><Button tone="warning">Warning</Button></div> },
       { title: "States", content: <div className="docs-row"><Button loading>Uploading</Button><Button disabled>Disabled</Button><Button variant="soft" tone="neutral">Quiet</Button></div> },
     ],
@@ -171,7 +171,7 @@ const pages: Record<string, PageConfig> = {
     description: "A native select for compact choices where custom popovers would add friction.",
     hero: <div style={{ width: "min(100%, 320px)" }}><Select label="Motion"><option>Subtle</option><option>Expressive</option><option>Reduced</option></Select></div>,
     sections: [
-      { title: "States", content: <div className="docs-grid"><Select label="Default"><option>Sky</option><option>Neutral</option></Select><Select label="Error" error="Pick an available option."><option>Unavailable</option></Select></div> },
+      { title: "States", content: <div className="docs-grid"><Select label="Default"><option>Gulaab</option><option>Neutral</option></Select><Select label="Error" error="Pick an available option."><option>Unavailable</option></Select></div> },
     ],
   },
   checkbox: {
@@ -209,7 +209,7 @@ const pages: Record<string, PageConfig> = {
   badge: {
     title: "Badge",
     description: "Small status text with restrained color and clear meaning.",
-    hero: <Badge>Sky primary</Badge>,
+    hero: <Badge>Gulaab primary</Badge>,
     sections: [
       { title: "Variants", content: <div className="docs-row"><Badge variant="solid">Solid</Badge><Badge variant="soft">Soft</Badge><Badge variant="outline">Outline</Badge></div> },
       { title: "Tones", content: <div className="docs-row"><Badge tone="primary">Primary</Badge><Badge tone="neutral">Neutral</Badge><Badge tone="danger">Danger</Badge><Badge tone="warning">Warning</Badge></div> },
@@ -218,7 +218,7 @@ const pages: Record<string, PageConfig> = {
   avatar: {
     title: "Avatar",
     description: "A person or entity marker with a quiet fallback.",
-    hero: <div className="docs-row"><Avatar fallback="RS" size="large" /><Avatar fallback="SK" size="large" src="https://picsum.photos/seed/sky-avatar/160/160" alt="Sample portrait" /></div>,
+    hero: <div className="docs-row"><Avatar fallback="RS" size="large" /><Avatar fallback="SK" size="large" src="https://picsum.photos/seed/gulaab-avatar/160/160" alt="Sample portrait" /></div>,
     sections: [
       { title: "Sizes", content: <div className="docs-row"><Avatar fallback="SM" size="small" /><Avatar fallback="MD" size="medium" /><Avatar fallback="LG" size="large" /></div> },
     ],

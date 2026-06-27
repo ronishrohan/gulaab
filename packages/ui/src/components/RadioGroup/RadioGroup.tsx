@@ -28,15 +28,15 @@ const RadioGroup = React.forwardRef<HTMLFieldSetElement, RadioGroupProps>(
     }
 
     return (
-      <fieldset ref={ref} className={cn("sky-radio-group", className)} {...props}>
-        {legend && <legend className="sky-radio-legend">{legend}</legend>}
+      <fieldset ref={ref} className={cn("gulaab-radio-group", className)} {...props}>
+        {legend && <legend className="gulaab-radio-legend">{legend}</legend>}
         {options.map((option) => {
           const id = `${name}-${option.value}`;
           return (
-            <label key={option.value} className="sky-choice" htmlFor={id}>
+            <label key={option.value} className="gulaab-choice" htmlFor={id}>
               <input
                 id={id}
-                className="sky-choice-input"
+                className="gulaab-choice-input"
                 type="radio"
                 name={name}
                 value={option.value}
@@ -44,10 +44,10 @@ const RadioGroup = React.forwardRef<HTMLFieldSetElement, RadioGroupProps>(
                 disabled={option.disabled}
                 onChange={() => handleChange(option.value)}
               />
-              <span className="sky-radio-mark" aria-hidden="true" />
-              <span className="sky-choice-copy">
-                <span className="sky-choice-label">{option.label}</span>
-                {option.description && <span className="sky-choice-description">{option.description}</span>}
+              <span className="gulaab-radio-mark" aria-hidden="true" />
+              <span className="gulaab-choice-copy">
+                <span className="gulaab-choice-label">{option.label}</span>
+                {option.description && <span className="gulaab-choice-description">{option.description}</span>}
               </span>
             </label>
           );

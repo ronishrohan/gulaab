@@ -25,12 +25,12 @@ const Switch = React.forwardRef<HTMLButtonElement, SwitchProps>(
     }
 
     return (
-      <button ref={ref} type="button" role="switch" aria-checked={isPressed} className={cn("sky-switch", className)} data-size={size} onClick={handleClick} {...props}>
-        <span className="sky-switch-track" aria-hidden="true"><span className="sky-switch-thumb" /></span>
+      <button ref={ref} type="button" role="switch" aria-checked={isPressed} className={cn("gulaab-switch", className)} data-size={size} onClick={handleClick} {...props}>
+        <span className="gulaab-switch-track" aria-hidden="true"><span className="gulaab-switch-thumb" /></span>
         {(label || description) && (
-          <span className="sky-switch-copy">
-            {label && <span className="sky-switch-label">{label}</span>}
-            {description && <span className="sky-switch-description">{description}</span>}
+          <span className="gulaab-switch-copy">
+            {label && <span className="gulaab-switch-label">{label}</span>}
+            {description && <span className="gulaab-switch-description">{description}</span>}
           </span>
         )}
       </button>

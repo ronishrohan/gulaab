@@ -4,11 +4,11 @@ import { useSyncExternalStore } from "react";
 import { SpeakerHigh, SpeakerSlash } from "@phosphor-icons/react";
 import { Button } from "@gulaab/ui";
 
-const SOUND_EVENT = "sky-sound-change";
+const SOUND_EVENT = "gulaab-sound-change";
 
 function getSoundSnapshot() {
   if (typeof window === "undefined") return true;
-  return localStorage.getItem("sky-sounds") !== "false";
+  return localStorage.getItem("gulaab-sounds") !== "false";
 }
 
 function subscribeSound(callback: () => void) {
@@ -22,7 +22,7 @@ function subscribeSound(callback: () => void) {
 
 function storeSound(enabled: boolean) {
   try {
-    localStorage.setItem("sky-sounds", enabled ? "true" : "false");
+    localStorage.setItem("gulaab-sounds", enabled ? "true" : "false");
   } finally {
     window.dispatchEvent(new Event(SOUND_EVENT));
   }

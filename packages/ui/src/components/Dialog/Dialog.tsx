@@ -10,7 +10,7 @@ export type DialogProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.
 export type DialogTriggerProps = React.ComponentPropsWithoutRef<typeof DialogPrimitive.Trigger>;
 
 const DialogOverlay = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Overlay>, React.ComponentPropsWithoutRef<typeof DialogPrimitive.Overlay>>(
-  ({ className, ...props }, ref) => <DialogPrimitive.Overlay ref={ref} className={cn("sky-dialog-overlay", className)} {...props} />
+  ({ className, ...props }, ref) => <DialogPrimitive.Overlay ref={ref} className={cn("gulaab-dialog-overlay", className)} {...props} />
 );
 DialogOverlay.displayName = "DialogOverlay";
 
@@ -20,8 +20,8 @@ const DialogContent = React.forwardRef<React.ElementRef<typeof DialogPrimitive.C
   ({ className, children, ...props }, ref) => (
     <DialogPrimitive.Portal>
       <DialogOverlay />
-      <DialogPrimitive.Content ref={ref} className={cn("sky-dialog-content", className)} {...props}>
-        <div className="sky-dialog-panel">{children}</div>
+      <DialogPrimitive.Content ref={ref} className={cn("gulaab-dialog-content", className)} {...props}>
+        <div className="gulaab-dialog-panel">{children}</div>
       </DialogPrimitive.Content>
     </DialogPrimitive.Portal>
   )
@@ -29,15 +29,15 @@ const DialogContent = React.forwardRef<React.ElementRef<typeof DialogPrimitive.C
 DialogContent.displayName = "DialogContent";
 
 export interface DialogHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
-const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(({ className, ...props }, ref) => <div ref={ref} className={cn("sky-dialog-header", className)} {...props} />);
+const DialogHeader = React.forwardRef<HTMLDivElement, DialogHeaderProps>(({ className, ...props }, ref) => <div ref={ref} className={cn("gulaab-dialog-header", className)} {...props} />);
 DialogHeader.displayName = "DialogHeader";
 
 export interface DialogTitleProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Title> {}
-const DialogTitle = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Title>, DialogTitleProps>(({ className, ...props }, ref) => <DialogPrimitive.Title ref={ref} className={cn("sky-dialog-title", className)} {...props} />);
+const DialogTitle = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Title>, DialogTitleProps>(({ className, ...props }, ref) => <DialogPrimitive.Title ref={ref} className={cn("gulaab-dialog-title", className)} {...props} />);
 DialogTitle.displayName = "DialogTitle";
 
 export interface DialogDescriptionProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Description> {}
-const DialogDescription = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Description>, DialogDescriptionProps>(({ className, ...props }, ref) => <DialogPrimitive.Description ref={ref} className={cn("sky-dialog-description", className)} {...props} />);
+const DialogDescription = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Description>, DialogDescriptionProps>(({ className, ...props }, ref) => <DialogPrimitive.Description ref={ref} className={cn("gulaab-dialog-description", className)} {...props} />);
 DialogDescription.displayName = "DialogDescription";
 
 export interface DialogCloseProps extends React.ComponentPropsWithoutRef<typeof DialogPrimitive.Close> {}
@@ -47,7 +47,7 @@ const DialogClose = React.forwardRef<React.ElementRef<typeof DialogPrimitive.Clo
   }
 
   return (
-    <DialogClosePrimitive ref={ref} className={cn("sky-dialog-close", className)} aria-label="Close" {...props}>
+    <DialogClosePrimitive ref={ref} className={cn("gulaab-dialog-close", className)} aria-label="Close" {...props}>
       {children ?? "x"}
     </DialogClosePrimitive>
   );

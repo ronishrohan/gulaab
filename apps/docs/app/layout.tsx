@@ -22,14 +22,14 @@ const openRunde = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Sky UI",
-  description: "A light-first React component library with tactile motion and subtle sound.",
+  title: "Gulaab",
+  description: "A small React component library for buttons and interaction details.",
 };
 
 const themeScript = `
 +(function() {
 +  try {
-+    var stored = localStorage.getItem('sky-theme');
++    var stored = localStorage.getItem('gulaab-theme');
 +    if (stored === 'dark') document.documentElement.classList.add('dark');
 +  } catch(e) {}
 +})();

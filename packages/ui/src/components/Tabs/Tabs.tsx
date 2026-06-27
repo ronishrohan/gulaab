@@ -55,8 +55,8 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(({ className, items, de
   }
 
   return (
-    <div ref={ref} className={cn("sky-tabs", className)} {...props}>
-      <div className="sky-tabs-list" role="tablist" onKeyDown={handleKeyDown}>
+    <div ref={ref} className={cn("gulaab-tabs", className)} {...props}>
+      <div className="gulaab-tabs-list" role="tablist" onKeyDown={handleKeyDown}>
         {items.map((item) => {
           const selected = selectedValue === item.value;
           const tabId = `${baseId}-tab-${item.value}`;
@@ -66,7 +66,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(({ className, items, de
               key={item.value}
               id={tabId}
               type="button"
-              className="sky-tabs-trigger"
+              className="gulaab-tabs-trigger"
               role="tab"
               aria-selected={selected}
               aria-controls={panelId}
@@ -79,7 +79,7 @@ const Tabs = React.forwardRef<HTMLDivElement, TabsProps>(({ className, items, de
         })}
       </div>
       {selectedItem && (
-        <div className="sky-tabs-panel" role="tabpanel" id={`${baseId}-panel-${selectedItem.value}`} aria-labelledby={`${baseId}-tab-${selectedItem.value}`}>
+        <div className="gulaab-tabs-panel" role="tabpanel" id={`${baseId}-panel-${selectedItem.value}`} aria-labelledby={`${baseId}-tab-${selectedItem.value}`}>
           {selectedItem.content}
         </div>
       )}

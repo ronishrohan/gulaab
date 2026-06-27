@@ -8,7 +8,7 @@ export interface IconButtonProps extends Omit<ButtonProps, "children"> {
 
 const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(({ className, children, ...props }, ref) => {
   return (
-    <Button ref={ref} className={cn("sky-icon-button", className)} {...props}>
+    <Button ref={ref} className={cn("gulaab-icon-button", className)} {...props}>
       {children}
     </Button>
   );

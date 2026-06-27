@@ -8,7 +8,7 @@ export interface KbdProps extends React.HTMLAttributes<HTMLElement> {
 }
 
 const Kbd = React.forwardRef<HTMLElement, KbdProps>(({ className, size = "medium", ...props }, ref) => (
-  <kbd ref={ref} className={cn("sky-kbd", className)} data-size={size} {...props} />
+  <kbd ref={ref} className={cn("gulaab-kbd", className)} data-size={size} {...props} />
 ));
 
 Kbd.displayName = "Kbd";

@@ -11,13 +11,13 @@ export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Toast = React.forwardRef<HTMLDivElement, ToastProps>(({ className, title, description, tone = "primary", action, onClose, ...props }, ref) => (
-  <div ref={ref} className={cn("sky-toast", className)} data-tone={tone} role="status" {...props}>
+  <div ref={ref} className={cn("gulaab-toast", className)} data-tone={tone} role="status" {...props}>
     <div>
-      <p className="sky-toast-title">{title}</p>
-      {description && <p className="sky-toast-description">{description}</p>}
+      <p className="gulaab-toast-title">{title}</p>
+      {description && <p className="gulaab-toast-description">{description}</p>}
     </div>
-    {onClose && <button type="button" className="sky-toast-close" aria-label="Close notification" onClick={onClose}>x</button>}
-    {action && <div className="sky-toast-action">{action}</div>}
+    {onClose && <button type="button" className="gulaab-toast-close" aria-label="Close notification" onClick={onClose}>x</button>}
+    {action && <div className="gulaab-toast-action">{action}</div>}
   </div>
 ));
 

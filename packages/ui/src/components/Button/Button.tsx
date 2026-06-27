@@ -32,14 +32,14 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const content = (
       <>
         {loading && <SpinnerIcon />}
-        <span className="sky-button-label">{children}</span>
+        <span className="gulaab-button-label">{children}</span>
       </>
     );
 
     return (
       <Comp
         ref={ref}
-        className={cn("sky-button", className)}
+        className={cn("gulaab-button", className)}
         data-variant={variant}
         data-tone={tone}
         data-size={size}
@@ -60,7 +60,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
 
 function SpinnerIcon() {
   return (
-    <svg className="sky-button-spinner" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <svg className="gulaab-button-spinner" viewBox="0 0 16 16" fill="none" aria-hidden="true">
       <circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="2" opacity="0.25" />
       <path d="M14 8a6 6 0 0 0-6-6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     </svg>

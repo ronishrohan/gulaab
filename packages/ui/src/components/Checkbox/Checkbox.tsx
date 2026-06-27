@@ -19,18 +19,18 @@ const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     const describedBy = [descriptionId, errorId].filter(Boolean).join(" ") || undefined;
 
     return (
-      <div className={cn("sky-field", className)}>
-        <label className="sky-choice" htmlFor={checkboxId} data-size={size}>
-          <input ref={ref} id={checkboxId} type="checkbox" className="sky-choice-input" aria-invalid={error ? true : undefined} aria-describedby={describedBy} {...props} />
-          <span className="sky-checkbox" aria-hidden="true" />
+      <div className={cn("gulaab-field", className)}>
+        <label className="gulaab-choice" htmlFor={checkboxId} data-size={size}>
+          <input ref={ref} id={checkboxId} type="checkbox" className="gulaab-choice-input" aria-invalid={error ? true : undefined} aria-describedby={describedBy} {...props} />
+          <span className="gulaab-checkbox" aria-hidden="true" />
           {(label || description) && (
-            <span className="sky-choice-copy">
-              {label && <span className="sky-choice-label">{label}</span>}
-              {description && <span className="sky-choice-description" id={descriptionId}>{description}</span>}
+            <span className="gulaab-choice-copy">
+              {label && <span className="gulaab-choice-label">{label}</span>}
+              {description && <span className="gulaab-choice-description" id={descriptionId}>{description}</span>}
             </span>
           )}
         </label>
-        {error && <p className="sky-field-error" id={errorId}>{error}</p>}
+        {error && <p className="gulaab-field-error" id={errorId}>{error}</p>}
       </div>
     );
   }

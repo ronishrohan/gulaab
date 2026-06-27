@@ -17,7 +17,7 @@ const Avatar = React.forwardRef<HTMLSpanElement, AvatarProps>(
     const initials = fallback?.trim().slice(0, 2).toUpperCase();
 
     return (
-      <span ref={ref} className={cn("sky-avatar", className)} data-size={size} {...props}>
+      <span ref={ref} className={cn("gulaab-avatar", className)} data-size={size} {...props}>
         {showImage ? <img src={src} alt={alt} onError={() => setFailedSrc(src)} /> : <span aria-hidden="true">{initials}</span>}
       </span>
     );

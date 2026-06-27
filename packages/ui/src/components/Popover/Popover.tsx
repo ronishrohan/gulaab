@@ -12,7 +12,7 @@ export interface PopoverContentProps extends React.ComponentPropsWithoutRef<type
 const PopoverContent = React.forwardRef<React.ElementRef<typeof PopoverPrimitive.Content>, PopoverContentProps>(
   ({ className, sideOffset = 8, ...props }, ref) => (
     <PopoverPrimitive.Portal>
-      <PopoverPrimitive.Content ref={ref} sideOffset={sideOffset} className={cn("sky-popover", className)} {...props} />
+      <PopoverPrimitive.Content ref={ref} sideOffset={sideOffset} className={cn("gulaab-popover", className)} {...props} />
     </PopoverPrimitive.Portal>
   )
 );
