@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Bell, CloudArrowUp, Gear, Heart, Plus, X } from "@phosphor-icons/react";
+import { IconBell, IconCloudUpload, IconHeart, IconPlus, IconSettings, IconX } from "@tabler/icons-react";
 import {
   Avatar,
   Badge,
@@ -47,17 +47,15 @@ interface PageConfig {
   description: string;
   hero: React.ReactNode;
   sections: DemoSection[];
-  soundRelevant?: boolean;
 }
 
-function PageFrame({ title, description, hero, sections, soundRelevant }: PageConfig) {
+function PageFrame({ title, description, hero, sections }: PageConfig) {
   return (
     <div className="docs-shell">
       <Sidebar />
       <main className="docs-main">
         <article className="docs-page">
           <header className="docs-hero">
-            <p className="docs-kicker">Gulaab</p>
             <h1 className="docs-title">{title}</h1>
             <p className="docs-description">{description}</p>
           </header>
@@ -68,31 +66,9 @@ function PageFrame({ title, description, hero, sections, soundRelevant }: PageCo
                 <h2 className="docs-section-title">{section.title}</h2>
                 {section.description && <p className="docs-section-description">{section.description}</p>}
               </div>
-              <div className="docs-demo">{section.content}</div>
+              {section.content}
             </section>
           ))}
-          <section className="docs-section">
-            <div className="docs-section-header">
-              <h2 className="docs-section-title">Accessibility and motion</h2>
-              <p className="docs-section-description">Every shipped component page names the interaction contract, not only the visual state.</p>
-            </div>
-            <div className="docs-grid">
-              <div className="docs-card">
-                <p className="docs-card-title">Accessibility</p>
-                <p className="docs-card-copy">Prefer native semantics, visible labels, focus rings, and ARIA only where the native element needs extra context.</p>
-              </div>
-              <div className="docs-card">
-                <p className="docs-card-title">Motion</p>
-                <p className="docs-card-copy">State changes stay under 300ms, use exact transition properties, and collapse to near-instant behavior for reduced motion.</p>
-              </div>
-              {soundRelevant && (
-                <div className="docs-card">
-                  <p className="docs-card-title">Sound</p>
-                  <p className="docs-card-copy">Sound is pointer-only, user-disableable from the sidebar, and never the only signal for state.</p>
-                </div>
-              )}
-            </div>
-          </section>
         </article>
       </main>
     </div>
@@ -122,9 +98,8 @@ function ToastDemo() {
 const pages: Record<string, PageConfig> = {
   button: {
     title: "Button",
-    soundRelevant: true,
     description: "A tactile pressable for primary actions, quiet actions, loading states, and optional sound feedback.",
-    hero: <SoundButton loading={false}><CloudArrowUp size={17} aria-hidden="true" />Upload</SoundButton>,
+    hero: <SoundButton loading={false}><IconCloudUpload size={17} stroke={1.8} aria-hidden="true" />Upload</SoundButton>,
     sections: [
       { title: "Variants", description: "One Gulaab accent, four useful treatments.", content: <div className="docs-row"><SoundButton variant="solid">Solid</SoundButton><SoundButton variant="soft">Soft</SoundButton><SoundButton variant="outline">Outline</SoundButton><SoundButton variant="ghost">Ghost</SoundButton></div> },
       { title: "Tones", description: "Neutral and functional tones exist for meaning, not decoration.", content: <div className="docs-row"><Button tone="primary">Primary</Button><Button tone="neutral">Neutral</Button><Button tone="danger">Danger</Button><Button tone="warning">Warning</Button></div> },
@@ -133,12 +108,11 @@ const pages: Record<string, PageConfig> = {
   },
   "icon-button": {
     title: "Icon Button",
-    soundRelevant: true,
     description: "A square pressable for dense controls that still keeps a generous hit area.",
-    hero: <IconButton aria-label="Notifications"><Bell size={18} /></IconButton>,
+    hero: <IconButton aria-label="Notifications"><IconBell size={18} stroke={1.8} /></IconButton>,
     sections: [
-      { title: "Variants", content: <div className="docs-row"><IconButton aria-label="Add"><Plus size={18} /></IconButton><IconButton variant="soft" aria-label="Favorite"><Heart size={18} /></IconButton><IconButton variant="outline" aria-label="Settings"><Gear size={18} /></IconButton><IconButton variant="ghost" aria-label="Close"><X size={18} /></IconButton></div> },
-      { title: "Sizes", content: <div className="docs-row"><IconButton size="small" aria-label="Small"><Plus size={15} /></IconButton><IconButton size="medium" aria-label="Medium"><Plus size={17} /></IconButton><IconButton size="large" aria-label="Large"><Plus size={20} /></IconButton></div> },
+      { title: "Variants", content: <div className="docs-row"><IconButton aria-label="Add"><IconPlus size={18} stroke={1.8} /></IconButton><IconButton variant="soft" aria-label="Favorite"><IconHeart size={18} stroke={1.8} /></IconButton><IconButton variant="outline" aria-label="Settings"><IconSettings size={18} stroke={1.8} /></IconButton><IconButton variant="ghost" aria-label="Close"><IconX size={18} stroke={1.8} /></IconButton></div> },
+      { title: "Sizes", content: <div className="docs-row"><IconButton size="small" aria-label="Small"><IconPlus size={15} stroke={1.8} /></IconButton><IconButton size="medium" aria-label="Medium"><IconPlus size={17} stroke={1.8} /></IconButton><IconButton size="large" aria-label="Large"><IconPlus size={20} stroke={1.8} /></IconButton></div> },
     ],
   },
   "link-button": {
@@ -281,7 +255,6 @@ const pages: Record<string, PageConfig> = {
   },
   toast: {
     title: "Toast",
-    soundRelevant: true,
     description: "A temporary status surface for confirmations and recoverable messages.",
     hero: <Toast title="Saved" description="The confirmation is visual first." />,
     sections: [

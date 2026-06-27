@@ -1,7 +1,7 @@
 "use client";
 
 import { useSyncExternalStore } from "react";
-import { SpeakerHigh, SpeakerSlash } from "@phosphor-icons/react";
+import { IconVolume, IconVolumeOff } from "@tabler/icons-react";
 import { Button } from "@gulaab/ui";
 
 const SOUND_EVENT = "gulaab-sound-change";
@@ -32,8 +32,8 @@ export function SoundToggle() {
   const enabled = useSyncExternalStore<boolean>(subscribeSound, getSoundSnapshot, () => true);
 
   return (
-    <Button variant="ghost" tone="neutral" size="small" onClick={() => storeSound(!enabled)} aria-pressed={enabled} aria-label={`${enabled ? "Disable" : "Enable"} sounds`}>
-      {enabled ? <SpeakerHigh size={15} aria-hidden="true" /> : <SpeakerSlash size={15} aria-hidden="true" />}
+    <Button className="docs-sidebar-action" variant="ghost" tone="neutral" size="small" onClick={() => storeSound(!enabled)} aria-pressed={enabled} aria-label={`${enabled ? "Disable" : "Enable"} sounds`}>
+      {enabled ? <IconVolume size={15} stroke={1.8} aria-hidden="true" /> : <IconVolumeOff size={15} stroke={1.8} aria-hidden="true" />}
       {enabled ? "Sound on" : "Sound off"}
     </Button>
   );

@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useSyncExternalStore } from "react";
 import { flushSync } from "react-dom";
-import { Moon, Sun } from "@phosphor-icons/react";
+import { IconMoon, IconSun } from "@tabler/icons-react";
 import { Button, Kbd } from "@gulaab/ui";
 
 type Theme = "light" | "dark";
@@ -86,8 +86,8 @@ export function ThemeToggle() {
   }, [applyToggle, theme]);
 
   return (
-    <Button variant="ghost" tone="neutral" size="small" onClick={() => applyToggle(theme)} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
-      {theme === "light" ? <Moon size={15} aria-hidden="true" /> : <Sun size={15} aria-hidden="true" />}
+    <Button className="docs-sidebar-action" variant="ghost" tone="neutral" size="small" onClick={() => applyToggle(theme)} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
+      {theme === "light" ? <IconMoon size={15} stroke={1.8} aria-hidden="true" /> : <IconSun size={15} stroke={1.8} aria-hidden="true" />}
       {theme === "light" ? "Dark" : "Light"}
       <Kbd size="small">Cmd \</Kbd>
     </Button>
