@@ -1,6 +1,6 @@
 {
   "name": "@gulaab/ui",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "a small React component library for buttons and interaction details.",
   "private": false,
   "main": "./dist/index.js",
@@ -12,9 +12,12 @@
       "require": "./dist/index.js",
       "import": "./dist/index.mjs"
     },
-    "./styles": "./dist/styles.css"
+    "./styles": "./src/styles.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist",
+    "src/styles.css"
+  ],
   "scripts": {
     "build": "tsup",
     "dev": "tsup --watch",
@@ -31,10 +34,11 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.17",
+    "@radix-ui/react-popover": "^1.1.17",
     "@radix-ui/react-slot": "^1",
-    "class-variance-authority": "^0.7",
+    "@radix-ui/react-tooltip": "^1.2.10",
     "clsx": "^2",
-    "motion": "^11",
     "tailwind-merge": "^2"
   }
 }

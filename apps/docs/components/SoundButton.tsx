@@ -1,20 +1,20 @@
 "use client";
 
 import { Button, type ButtonProps } from "@gulaab/ui";
-import { playSound } from "@/hooks/useSound";
-import type { ButtonVariant } from "@gulaab/ui";
+import { playSound, type SoundVariant } from "@/hooks/useSound";
 
 interface SoundButtonProps extends ButtonProps {
-  soundVariant?: ButtonVariant;
+  soundVariant?: SoundVariant;
 }
 
-export function SoundButton({ soundVariant, variant = "solid", onClick, ...props }: SoundButtonProps) {
-  const sv = (soundVariant ?? variant) as ButtonVariant;
-
-  function handleClick(e: React.MouseEvent<HTMLButtonElement>) {
-    playSound(sv as Parameters<typeof playSound>[0]);
-    onClick?.(e);
-  }
-
-  return <Button variant={variant} {...props} onClick={handleClick} />;
+export function SoundButton({ soundVariant = "press", onClick, ...props }: SoundButtonProps) {
+  return (
+    <Button
+      {...props}
+      onClick={(event) => {
+        if ("pointerType" in event.nativeEvent && !event.defaultPrevented) playSound(soundVariant);
+        onClick?.(event);
+      }}
+    />
+  );
 }
