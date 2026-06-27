@@ -6,7 +6,7 @@ export interface ComponentNavItem {
 }
 
 export const COMPONENTS: ComponentNavItem[] = [
-  { name: "Button", slug: "button", href: "/" },
+  { name: "Button", slug: "button", href: "/button" },
   { name: "Icon Button", slug: "icon-button", href: "/icon-button" },
   { name: "Link Button", slug: "link-button", href: "/link-button" },
   { name: "Text Field", slug: "text-field", href: "/text-field" },

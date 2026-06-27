@@ -33,7 +33,6 @@ import {
   Tooltip,
 } from "@gulaab/ui";
 import { Sidebar } from "./Sidebar";
-import { SoundButton } from "./SoundButton";
 import { COMPONENTS } from "./componentRegistry";
 
 interface DemoSection {
@@ -59,7 +58,7 @@ function PageFrame({ title, description, hero, sections }: PageConfig) {
             <h1 className="docs-title">{title}</h1>
             <p className="docs-description">{description}</p>
           </header>
-          <div className="docs-hero-card">{hero}</div>
+          <div className="docs-example">{hero}</div>
           {sections.map((section) => (
             <section className="docs-section" key={section.title}>
               <div className="docs-section-header">
@@ -90,7 +89,7 @@ function ToastDemo() {
   return (
     <div className="docs-row">
       <Button variant="soft" onClick={() => setVisible(true)}>Show toast</Button>
-      {visible && <Toast title="Upload complete" description="Sound is a secondary cue. The visual state carries the message." onClose={() => setVisible(false)} />}
+      {visible && <Toast title="Upload complete" description="The visual state carries the message." onClose={() => setVisible(false)} />}
     </div>
   );
 }
@@ -98,11 +97,11 @@ function ToastDemo() {
 const pages: Record<string, PageConfig> = {
   button: {
     title: "Button",
-    description: "A tactile pressable for primary actions, quiet actions, loading states, and optional sound feedback.",
-    hero: <SoundButton loading={false}><IconCloudUpload size={17} stroke={1.8} aria-hidden="true" />Upload</SoundButton>,
+    description: "Actions in a few useful treatments.",
+    hero: <Button loading={false}><IconCloudUpload size={17} stroke={1.8} aria-hidden="true" />Upload</Button>,
     sections: [
-      { title: "Variants", description: "One Gulaab accent, four useful treatments.", content: <div className="docs-row"><SoundButton variant="solid">Solid</SoundButton><SoundButton variant="soft">Soft</SoundButton><SoundButton variant="outline">Outline</SoundButton><SoundButton variant="ghost">Ghost</SoundButton></div> },
-      { title: "Tones", description: "Neutral and functional tones exist for meaning, not decoration.", content: <div className="docs-row"><Button tone="primary">Primary</Button><Button tone="neutral">Neutral</Button><Button tone="danger">Danger</Button><Button tone="warning">Warning</Button></div> },
+      { title: "Variants", content: <div className="docs-row"><Button variant="solid">Solid</Button><Button variant="soft">Soft</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button></div> },
+      { title: "Tones", content: <div className="docs-row"><Button tone="primary">Primary</Button><Button tone="neutral">Neutral</Button><Button tone="danger">Danger</Button><Button tone="warning">Warning</Button></div> },
       { title: "States", content: <div className="docs-row"><Button loading>Uploading</Button><Button disabled>Disabled</Button><Button variant="soft" tone="neutral">Quiet</Button></div> },
     ],
   },
@@ -151,7 +150,7 @@ const pages: Record<string, PageConfig> = {
   checkbox: {
     title: "Checkbox",
     description: "A native checkbox with a custom visual mark and clear supporting copy.",
-    hero: <Checkbox label="Enable sound" description="Only for meaningful pointer actions." defaultChecked />,
+    hero: <Checkbox label="Enable updates" description="Use clear labels for settings." defaultChecked />,
     sections: [
       { title: "States", content: <div className="docs-grid"><Checkbox label="Default" description="Unchecked state." /><Checkbox label="Checked" defaultChecked /><Checkbox label="Disabled" disabled /><Checkbox label="Error" error="This choice is required." /></div> },
     ],
@@ -161,7 +160,7 @@ const pages: Record<string, PageConfig> = {
     description: "A binary setting control for immediate on/off state.",
     hero: <Switch label="Dark mode" description="The thumb moves with a short ease-out." defaultPressed />,
     sections: [
-      { title: "States", content: <div className="docs-grid"><Switch label="Sounds" description="Subtle feedback." /><Switch label="Reduced motion" defaultPressed /><Switch label="Disabled" disabled /></div> },
+      { title: "States", content: <div className="docs-grid"><Switch label="Updates" description="Subtle feedback." /><Switch label="Reduced motion" defaultPressed /><Switch label="Disabled" disabled /></div> },
     ],
   },
   "radio-group": {
@@ -218,13 +217,13 @@ const pages: Record<string, PageConfig> = {
     description: "An anchored surface that scales from its trigger and closes without ceremony.",
     hero: <Popover><PopoverTrigger asChild><Button>Open popover</Button></PopoverTrigger><PopoverContent><p className="docs-note">Origin-aware motion keeps anchored surfaces feeling connected.</p></PopoverContent></Popover>,
     sections: [
-      { title: "Content", content: <Popover><PopoverTrigger asChild><Button variant="outline">Settings</Button></PopoverTrigger><PopoverContent><div className="docs-card"><p className="docs-card-title">Sound</p><p className="docs-card-copy">Enabled for pointer confirmations only.</p></div></PopoverContent></Popover> },
+      { title: "Content", content: <Popover><PopoverTrigger asChild><Button variant="outline">Settings</Button></PopoverTrigger><PopoverContent><p className="docs-note">Use popovers for short anchored content.</p></PopoverContent></Popover> },
     ],
   },
   dialog: {
     title: "Dialog",
     description: "A modal surface with staged backdrop, panel, title, and description.",
-    hero: <Dialog><DialogTrigger asChild><Button>Open dialog</Button></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Upload file</DialogTitle><DialogDescription>The visual state carries the message. Sound only reinforces it.</DialogDescription></DialogHeader><div className="docs-row"><DialogClose asChild><Button variant="soft" tone="neutral">Cancel</Button></DialogClose><DialogClose asChild><Button>Done</Button></DialogClose></div><DialogClose /></DialogContent></Dialog>,
+    hero: <Dialog><DialogTrigger asChild><Button>Open dialog</Button></DialogTrigger><DialogContent><DialogHeader><DialogTitle>Upload file</DialogTitle><DialogDescription>The visual state carries the message.</DialogDescription></DialogHeader><div className="docs-row"><DialogClose asChild><Button variant="soft" tone="neutral">Cancel</Button></DialogClose><DialogClose asChild><Button>Done</Button></DialogClose></div><DialogClose /></DialogContent></Dialog>,
     sections: [
       { title: "Staging", content: <p className="docs-note">Backdrop dims first, the panel settles from a visible shape, and focus remains inside until close.</p> },
     ],
@@ -232,7 +231,7 @@ const pages: Record<string, PageConfig> = {
   tabs: {
     title: "Tabs",
     description: "A compact way to switch local views without route changes.",
-    hero: <Tabs items={[{ value: "craft", label: "Craft", content: <p className="docs-note">Design details should be felt before they are noticed.</p> }, { value: "sound", label: "Sound", content: <p className="docs-note">Use sound as a secondary action.</p> }]} />,
+    hero: <Tabs items={[{ value: "craft", label: "Craft", content: <p className="docs-note">Design details should be felt before they are noticed.</p> }, { value: "docs", label: "Docs", content: <p className="docs-note">Keep the surface simple.</p> }]} />,
     sections: [
       { title: "States", content: <Tabs items={[{ value: "one", label: "Overview", content: "Overview content" }, { value: "two", label: "Motion", content: "Motion content" }, { value: "three", label: "A11y", content: "Accessibility content" }]} /> },
     ],

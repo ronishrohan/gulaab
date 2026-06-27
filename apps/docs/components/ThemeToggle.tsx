@@ -1,9 +1,8 @@
 "use client";
 
-import { useCallback, useEffect, useSyncExternalStore } from "react";
+import { useCallback, useEffect, useRef, useSyncExternalStore } from "react";
 import { flushSync } from "react-dom";
 import { IconMoon, IconSun } from "@tabler/icons-react";
-import { Button, Kbd } from "@gulaab/ui";
 
 type Theme = "light" | "dark";
 
@@ -30,32 +29,36 @@ function subscribeTheme(callback: () => void) {
 function storeTheme(theme: Theme) {
   try {
     localStorage.setItem("gulaab-theme", theme);
-  } finally {
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    window.dispatchEvent(new Event(THEME_EVENT));
+  } catch {
+    // Visual theme changes should still work when storage is unavailable.
   }
+  document.documentElement.classList.toggle("dark", theme === "dark");
+  window.dispatchEvent(new Event(THEME_EVENT));
 }
 
 export function ThemeToggle() {
   const theme = useSyncExternalStore<Theme>(subscribeTheme, getThemeSnapshot, () => "light");
+  const transitionId = useRef(0);
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
-  const cleanupTransitions = useCallback(() => {
-    document.documentElement.classList.remove("no-transition");
+  const cleanupTransitions = useCallback((id: number) => {
+    if (transitionId.current === id) document.documentElement.classList.remove("no-transition");
   }, []);
 
   const applyToggle = useCallback((current: Theme) => {
     const next = current === "light" ? "dark" : "light";
+    const id = transitionId.current + 1;
+    transitionId.current = id;
     document.documentElement.classList.add("no-transition");
 
     if (!document.startViewTransition || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       try {
         storeTheme(next);
       } finally {
-        requestAnimationFrame(() => requestAnimationFrame(cleanupTransitions));
+        requestAnimationFrame(() => requestAnimationFrame(() => cleanupTransitions(id)));
       }
       return;
     }
@@ -67,11 +70,11 @@ export function ThemeToggle() {
       });
     } catch {
       storeTheme(next);
-      cleanupTransitions();
+      cleanupTransitions(id);
       return;
     }
 
-    transition.finished.finally(cleanupTransitions);
+    transition.finished.finally(() => cleanupTransitions(id));
   }, [cleanupTransitions]);
 
   useEffect(() => {
@@ -86,10 +89,9 @@ export function ThemeToggle() {
   }, [applyToggle, theme]);
 
   return (
-    <Button className="docs-sidebar-action" variant="ghost" tone="neutral" size="small" onClick={() => applyToggle(theme)} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
+    <button className="docs-sidebar-action" type="button" onClick={() => applyToggle(theme)} aria-label={`Switch to ${theme === "light" ? "dark" : "light"} mode`}>
       {theme === "light" ? <IconMoon size={15} stroke={1.8} aria-hidden="true" /> : <IconSun size={15} stroke={1.8} aria-hidden="true" />}
       {theme === "light" ? "Dark" : "Light"}
-      <Kbd size="small">Cmd \</Kbd>
-    </Button>
+    </button>
   );
 }

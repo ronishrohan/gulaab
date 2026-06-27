@@ -8,12 +8,13 @@ interface SoundButtonProps extends ButtonProps {
 }
 
 export function SoundButton({ soundVariant = "press", onClick, ...props }: SoundButtonProps) {
-  function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
-    onClick?.(event);
-    if (!event.defaultPrevented && event.detail > 0) {
-      playSound(soundVariant);
-    }
-  }
-
-  return <Button {...props} onClick={handleClick} />;
+  return (
+    <Button
+      {...props}
+      onClick={(event) => {
+        if ("pointerType" in event.nativeEvent && !event.defaultPrevented) playSound(soundVariant);
+        onClick?.(event);
+      }}
+    />
+  );
 }

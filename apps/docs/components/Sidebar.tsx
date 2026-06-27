@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { COMPONENTS } from "./componentRegistry";
 import { ThemeToggle } from "./ThemeToggle";
-import { SoundToggle } from "./SoundToggle";
 
 export function Sidebar() {
   const pathname = usePathname();
@@ -40,8 +39,6 @@ export function Sidebar() {
 
       <div className="docs-sidebar-footer">
         <ThemeToggle />
-        <div style={{ height: 8 }} />
-        <SoundToggle />
       </div>
     </aside>
   );

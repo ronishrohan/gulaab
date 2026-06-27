@@ -1,5 +1,5 @@
-import { ComponentDocPage } from "@/components/ComponentDocs";
+import { HomePageContent } from "@/components/HomePageContent";
 
 export default function Home() {
-  return <ComponentDocPage slug="button" />;
+  return <HomePageContent />;
 }
