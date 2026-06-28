@@ -16,6 +16,26 @@ export function Sidebar() {
       </Link>
 
       <div className="docs-nav-group">
+        <nav className="docs-nav-list" aria-label="Overview">
+          <Link className="docs-nav-link" href="/#why-gulaab" data-active={pathname === "/" || undefined}>
+            Why Gulaab?
+          </Link>
+        </nav>
+      </div>
+
+      <div className="docs-nav-group">
+        <p className="docs-nav-label">Examples</p>
+        <nav className="docs-nav-list" aria-label="Examples">
+          <Link className="docs-nav-link" href="/#example-1">
+            Example 1
+          </Link>
+          <Link className="docs-nav-link" href="/#example-2">
+            Example 2
+          </Link>
+        </nav>
+      </div>
+
+      <div className="docs-nav-group">
         <p className="docs-nav-label">Components</p>
         <nav className="docs-nav-list" aria-label="Components">
           {COMPONENTS.map((item) => {

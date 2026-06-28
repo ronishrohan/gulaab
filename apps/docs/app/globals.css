@@ -17,6 +17,13 @@
 }
 
 * { box-sizing: border-box; }
+* {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+*::-webkit-scrollbar {
+  display: none;
+}
 html { background: var(--gulaab-bg); }
 body {
   min-height: 100dvh;
@@ -36,6 +43,8 @@ a { color: inherit; }
 ::selection { background: var(--gulaab-primary-soft); color: var(--gulaab-primary-text); }
 
 .docs-shell {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 200px minmax(0, 1fr);
   width: min(100%, 1100px);
@@ -63,8 +72,8 @@ a { color: inherit; }
 .docs-logo-mark {
   width: 16px;
   height: 16px;
-  border-radius: 50%;
-  background: linear-gradient(to bottom, #FB7185, #FFF1F2);
+  border-radius: 0;
+  background: var(--gulaab-primary);
   box-shadow: none;
 }
 
@@ -138,8 +147,11 @@ a { color: inherit; }
 .docs-description { margin: 0; max-width: 56ch; color: var(--gulaab-text-muted); font-size: 14px; line-height: 1.6; }
 .docs-example { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .docs-section { display: grid; gap: 14px; }
+.docs-section,
+.docs-section-header { scroll-margin-top: 40px; }
 .docs-section-header { display: grid; gap: 6px; max-width: 680px; }
 .docs-section-title { margin: 0; font-size: 18px; line-height: 1.2; letter-spacing: -0.03em; }
+.docs-section-subtitle { margin: 10px 0 0; font-size: 14px; line-height: 1.2; letter-spacing: -0.02em; font-weight: 600; }
 .docs-section-description { margin: 0; color: var(--gulaab-text-muted); font-size: 14px; line-height: 1.6; }
 .docs-row { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .docs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
@@ -148,7 +160,7 @@ a { color: inherit; }
 .docs-component-list a { color: var(--gulaab-text-muted); font-size: 14px; text-decoration: none; }
 .docs-component-list a:hover { color: var(--gulaab-text); }
 .docs-note { margin: 0; color: var(--gulaab-text-muted); font-size: 13px; line-height: 1.6; }
-.docs-swatch { height: 72px; border-radius: var(--gulaab-radius-md); border: 1px solid var(--gulaab-border); background: var(--swatch); }
+.docs-swatch { height: 72px; border-radius: 0; border: 1px solid var(--gulaab-border); background: var(--swatch); }
 
 @media (max-width: 900px) {
   .docs-shell { grid-template-columns: 1fr; padding: 0 20px; }
