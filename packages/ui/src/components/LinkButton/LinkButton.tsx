@@ -1,5 +1,4 @@
 import * as React from "react";
-import { cn } from "../../lib/utils";
 import type { ButtonSize, ButtonTone, ButtonVariant } from "../Button";
 
 export interface LinkButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
@@ -10,18 +9,22 @@ export interface LinkButtonProps extends React.AnchorHTMLAttributes<HTMLAnchorEl
 }
 
 const LinkButton = React.forwardRef<HTMLAnchorElement, LinkButtonProps>(
-  ({ className, variant = "link", tone = "primary", size = "medium", disabled = false, ...props }, ref) => (
-    <a
-      ref={ref}
-      className={cn("gulaab-link-button", className)}
-      data-variant={variant}
-      data-tone={tone}
-      data-size={size}
-      aria-disabled={disabled || undefined}
-      tabIndex={disabled ? -1 : props.tabIndex}
-      {...props}
-    />
-  )
+  ({ className, variant = "link", tone = "primary", size = "medium", disabled = false, ...props }, ref) => {
+    const linkClassName = className ? `gulaab-link-button ${className}` : "gulaab-link-button";
+
+    return (
+      <a
+        ref={ref}
+        className={linkClassName}
+        data-variant={variant}
+        data-tone={tone}
+        data-size={size}
+        aria-disabled={disabled || undefined}
+        tabIndex={disabled ? -1 : props.tabIndex}
+        {...props}
+      />
+    );
+  }
 );
 
 LinkButton.displayName = "LinkButton";

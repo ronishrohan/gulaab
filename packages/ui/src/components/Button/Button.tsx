@@ -1,24 +1,40 @@
 import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cn } from "../../lib/utils";
 
 export type ButtonVariant = "solid" | "soft" | "outline" | "ghost" | "link";
 export type ButtonTone = "primary" | "neutral" | "danger" | "warning";
 export type ButtonSize = "small" | "medium" | "large";
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  asChild?: boolean;
   loading?: boolean;
-  render?: React.ReactElement;
   variant?: ButtonVariant;
   tone?: ButtonTone;
   size?: ButtonSize;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, asChild = false, render, loading = false, disabled, variant = "solid", tone = "primary", size = "medium", children, onClick, tabIndex, ...props }, ref) => {
-    const Comp = asChild || render ? Slot : "button";
+  (
+    {
+      className,
+      loading = false,
+      disabled,
+      variant = "solid",
+      tone = "primary",
+      size = "medium",
+      children,
+      onClick,
+      onPointerCancel,
+      onPointerDown,
+      onPointerEnter,
+      onPointerLeave,
+      onPointerMove,
+      onPointerUp,
+      tabIndex,
+      ...props
+    },
+    ref
+  ) => {
     const disabledState = disabled || loading;
+    const buttonClassName = className ? `gulaab-button ${className}` : "gulaab-button";
 
     function handleClick(event: React.MouseEvent<HTMLButtonElement>) {
       if (disabledState) {
@@ -29,6 +45,63 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       onClick?.(event);
     }
 
+    function updatePressVars(event: React.PointerEvent<HTMLButtonElement>) {
+      const element = event.currentTarget;
+      const rect = element.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      element.style.setProperty("--gulaab-spot-x", `${Math.max(0, Math.min(x, rect.width)).toFixed(2)}px`);
+      element.style.setProperty("--gulaab-spot-y", `${Math.max(0, Math.min(y, rect.height)).toFixed(2)}px`);
+
+      const dxFromCenter = event.clientX - (rect.left + rect.width / 2);
+      const dyFromCenter = event.clientY - (rect.top + rect.height / 2);
+      const totalDistance = Math.abs(dxFromCenter) + Math.abs(dyFromCenter) || 1;
+      const distance = Math.sqrt(dxFromCenter ** 2 + dyFromCenter ** 2);
+      const scale = Math.min(distance / 220, 1) * 0.12;
+
+      element.style.setProperty("--gulaab-drag-x", `${Math.max(-10, Math.min(10, dxFromCenter * 0.08)).toFixed(2)}px`);
+      element.style.setProperty("--gulaab-drag-y", `${Math.max(-10, Math.min(10, dyFromCenter * 0.08)).toFixed(2)}px`);
+      element.style.setProperty("--gulaab-scale-x", (1.04 + scale * (Math.abs(dxFromCenter) / totalDistance)).toFixed(3));
+      element.style.setProperty("--gulaab-scale-y", (1.04 + scale * (Math.abs(dyFromCenter) / totalDistance)).toFixed(3));
+    }
+
+    function releasePointer(element: HTMLElement) {
+      delete element.dataset.pressed;
+      element.style.setProperty("--gulaab-drag-x", "0px");
+      element.style.setProperty("--gulaab-drag-y", "0px");
+      element.style.setProperty("--gulaab-scale-x", "1");
+      element.style.setProperty("--gulaab-scale-y", "1");
+    }
+
+    function handlePointerMove(event: React.PointerEvent<HTMLButtonElement>) {
+      if (!disabledState && event.currentTarget.dataset.pressed === "true") updatePressVars(event);
+      onPointerMove?.(event);
+    }
+
+    function handlePointerDown(event: React.PointerEvent<HTMLButtonElement>) {
+      if (!disabledState) {
+        event.currentTarget.dataset.pressed = "true";
+        event.currentTarget.setPointerCapture?.(event.pointerId);
+        updatePressVars(event);
+      }
+      onPointerDown?.(event);
+    }
+
+    function handlePointerUp(event: React.PointerEvent<HTMLButtonElement>) {
+      releasePointer(event.currentTarget);
+      onPointerUp?.(event);
+    }
+
+    function handlePointerCancel(event: React.PointerEvent<HTMLButtonElement>) {
+      releasePointer(event.currentTarget);
+      onPointerCancel?.(event);
+    }
+
+    function handlePointerLeave(event: React.PointerEvent<HTMLButtonElement>) {
+      if (event.currentTarget.dataset.pressed !== "true") releasePointer(event.currentTarget);
+      onPointerLeave?.(event);
+    }
+
     const content = (
       <>
         {loading && <SpinnerIcon />}
@@ -37,23 +110,28 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     );
 
     return (
-      <Comp
+      <button
         ref={ref}
-        className={cn("gulaab-button", className)}
+        className={buttonClassName}
         data-variant={variant}
         data-tone={tone}
         data-size={size}
         data-loading={loading || undefined}
-        disabled={!asChild && !render ? disabledState : undefined}
-        aria-disabled={asChild || render ? disabledState || undefined : undefined}
+        disabled={disabledState}
         aria-busy={loading || undefined}
         data-disabled={disabledState || undefined}
-        tabIndex={disabledState && (asChild || render) ? -1 : tabIndex}
+        tabIndex={tabIndex}
         onClick={handleClick}
+        onPointerCancel={handlePointerCancel}
+        onPointerDown={handlePointerDown}
+        onPointerEnter={onPointerEnter}
+        onPointerLeave={handlePointerLeave}
+        onPointerMove={handlePointerMove}
+        onPointerUp={handlePointerUp}
         {...props}
       >
-        {render ? React.cloneElement(render, {}, content) : content}
-      </Comp>
+        {content}
+      </button>
     );
   }
 );
